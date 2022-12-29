@@ -31,6 +31,7 @@ public:
     // Shininess
     static const float SHININESS_GRASS;
     static const float SHININESS_ROAD;
+    static const float SHININESS_WALLS;
 };
 
 #endif //GC_CONSTANTS_H

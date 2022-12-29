@@ -187,7 +187,36 @@ void initializeScene() {
             /* 37 (Grass bottom - 59) */vec3(880.5f, -48.1f, -920.41f),
             /* 38 (Grass bottom - 66) */vec3(880.5f, -48.1f, 918.24f),
             /* 39 (Grass bottom - 67) */vec3(-1029.73f, -48.1f, 918.24f),
-            /* ? ( - ) */vec3(0.0f, 0.0f, 0.0f),
+            // House front
+            /* 40 (House front - 50) */vec3(149.63f, 848.02f, -64.89f),
+            /* 41 (House front - 51) */vec3(62.39f, 678.83f, -64.89f),
+            /* 42 (House front - 54) */vec3(62.39f, 453.65f, -64.89f),
+            /* 43 (House front - 56) */vec3(31.46f, 316.43f, -64.89f),
+            /* 44 (House front - 58) */vec3(31.46f, 0.0f, -64.89f),
+            /* 45 (House front - 59) */vec3(223.28f, 678.83f, -64.89f),
+            /* 46 (House front - 81) */vec3(-224.47f, 466.78f, -64.89f),
+            /* 47 (House front - 62) */vec3(483.08f, 464.99f, -64.89f),
+            /* 48 (House front - 63) */vec3(249.36f, 316.43f, -64.89f),
+            /* 49 (House front - 64) */vec3(249.36f, 0.0f, -64.89f),
+            /* 50 (House front - 65) */vec3(483.08f, 0.0f, -64.89f),
+            /* 51 (House front - 79) */vec3(-224.47f, 0.0f, -64.89f),
+            /* 52 (House front - 55) */vec3(223.28f, 453.65f, -64.89f),
+            // House right
+            /* 53 (House right - 27) */vec3(483.08f, 464.99f, 636.31f),
+            /* 54 (House right - 29) */vec3(483.08f, 0.0f, 636.31f),
+            /* 55 (House right - 62) */vec3(483.08f, 464.99f, -64.89f),
+            /* 56 (House right - 65) */vec3(483.08f, 0.0f, -64.89f),
+            // House back
+            /* 57 (House back - 27) */vec3(483.08f, 464.99f, 636.31f),
+            /* 58 (House back - 29) */vec3(483.08f, 0.0f, 636.31f),
+            /* 59 (House back - 30) */vec3(149.63f, 848.02f, 636.31f),
+            /* 60 (House back - 74) */vec3(-224.47f, 466.78f, 636.31f),
+            /* 61 (House back - 76) */vec3(-224.47f, 0.0f, 636.31f),
+            // House left
+            /* 62 (House left - 74) */vec3(-224.47f, 466.78f, 636.31f),
+            /* 63 (House left - 76) */vec3(-224.47f, 0.0f, 636.31f),
+            /* 64 (House left - 79) */vec3(-224.47f, 0.0f, -64.89f),
+            /* 65 (House left - 81) */vec3(-224.47f, 466.78f, -64.89f),
     };
     const glm::vec3 colors[] = {
             // Grass
@@ -231,6 +260,32 @@ void initializeScene() {
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
     };
     const GLfloat shininess[] = {
             // Grass
@@ -274,6 +329,32 @@ void initializeScene() {
             Constants::SHININESS_GRASS,
             Constants::SHININESS_GRASS,
             Constants::SHININESS_GRASS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
+            Constants::SHININESS_WALLS,
     };
     GLuint indices[] = {
             // Grass top
@@ -307,6 +388,31 @@ void initializeScene() {
             // Grass bottom
             38, 39, 36, // 66, 67, 50
             38, 36, 37, // 66, 50, 59
+            // House front
+            44, 51, 43, // 58, 79, 56
+            43, 51, 46, // 56, 79, 61
+            42, 43, 46, // 54, 56, 81
+            42, 46, 41, // 54, 81, 51
+            41, 46, 40, // 61, 81, 50
+            52, 43, 42, // 55, 56, 54
+            47, 43, 52, // 62, 56, 55
+            47, 48, 43, // 62, 63, 56
+            47, 49, 48, // 62, 64, 63
+            47, 50, 49, // 62, 65, 64
+            47, 52, 45, // 62, 55, 59
+            47, 45, 40, // 62, 59, 50
+            45, 41, 40, // 59, 51, 50
+            // House right
+            54, 55, 56, // 29, 62, 65
+            54, 53, 55, // 29, 62, 27
+            // House back
+            61, 58, 57, // 76, 29, 27
+            61, 57, 60, // 76, 27, 74
+            60, 57, 59, // 74, 27, 30
+            // House left
+            64, 63, 62, // 79, 76, 74
+            64, 62, 65, // 79, 74, 81
+
     };
     // Set the normals
     const int numNormals = sizeof(vertices) / sizeof(vec3);

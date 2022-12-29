@@ -18,3 +18,4 @@ const vec3 Constants::COLOR_TREE_TRUNK = Color::fromHex("#8B7F70");
 
 const float Constants::SHININESS_GRASS = 1.0f;
 const float Constants::SHININESS_ROAD = 2.0f;
+const float Constants::SHININESS_WALLS = 4.0f;
