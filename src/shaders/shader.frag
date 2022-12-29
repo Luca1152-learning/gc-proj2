@@ -12,31 +12,28 @@ uniform vec3 skyColor;
 
 out vec4 out_Color;
 
-const float AMBIENT_STRENGTH = 0.7f;
-const float SPECULAR_STRENGTH = 0.5f;
+const float AMBIENT_STRENGTH = 0.4f;
+const float SPECULAR_STRENGTH = 0.2f;
 
 void main() {
     vec3 objectColor = vec3(ex_Color);
 
     // Ambient lighting
-    vec3 ambientLight = AMBIENT_STRENGTH * skyColor;
-    vec3 ambientTerm = ambientLight * objectColor;
+    vec3 ambientTerm = AMBIENT_STRENGTH * skyColor;
 
     // Diffuse lighting
     vec3 normal = normalize(ex_Normal);
     vec3 lightDirection = normalize(ex_LightPosition - ex_FragPos);
     float diffusionPercentage = max(dot(normal, lightDirection), 0.0);
-    vec3 diffuseTerm = diffusionPercentage * lightColor * objectColor;
+    vec3 diffuseTerm = diffusionPercentage * lightColor;
 
     // Specular lighting
-    float specularStrength = 0.5f;
     vec3 viewDirection = normalize(ex_ViewPosition - ex_FragPos);
-    vec3 reflectDirection = normalize(reflect(-lightDirection, normal));
-    float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), ex_Shininess);
-    vec3 specularLight = specularStrength  * lightColor;
-    vec3 specularTerm = spec * specularLight * objectColor;
+    vec3 reflectDirection = reflect(-lightDirection, normal);
+    float specularPercentage = pow(max(dot(viewDirection, reflectDirection), 0.0), ex_Shininess);
+    vec3 specularTerm = SPECULAR_STRENGTH * specularPercentage * lightColor;
 
     // Final color
-    vec3 result = ambientTerm + diffuseTerm + specularTerm;
+    vec3 result = (ambientTerm + diffuseTerm + specularTerm) * objectColor;
     out_Color = vec4(result, 1.0f);
 }

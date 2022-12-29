@@ -37,8 +37,8 @@ float deltaTime = 0.0f;
 float lastFrameTimestamp = 0.0f;
 
 // Lighting
-const glm::vec3 LIGHT_COLOR = glm::vec3(1.0f, 1.0f, 1.0f);
-glm::vec3 lightPosition = glm::vec3(1000.f, 5000.f, 2000.f);
+const glm::vec3 LIGHT_COLOR = glm::vec3(0.6f, 0.6f, 0.6f);
+glm::vec3 lightPosition = glm::vec3(1000.f, 1500.f, 1000.f);
 
 void processInput(GLFWwindow *window) {
     float cameraSpeed = static_cast<float>(MOVEMENT_SPEED * deltaTime);
@@ -141,6 +141,7 @@ void initializeShaders() {
 void initializeScene() {
     const vec3 vertices[] = {
             // Grass
+            // - Top
             /* 0 (Grass - 43) */vec3(-1029.73f, 0.0f, -920.41f),
             /* 1 (Grass - 32) */vec3(-96.5f, 0.0f, -920.41f),
             /* 2 (Grass - 65) */vec3(-1029.73f, 0.0f, 918.24f),
@@ -149,24 +150,12 @@ void initializeScene() {
             /* 5 (Grass - 25) */vec3(366.22f, 0.0f, -64.89f),
             /* 6 (Grass - 34) */vec3(366.22f, 0.0f, -920.41f),
             /* 7 (Grass - 58) */vec3(880.5f, 0.0f, -920.41f),
-            /* 8 (Grass - 28) */vec3(47.62f, 0.0f, -40.76f),
-            /* 9 (Grass - 50) */vec3(-1029.73f, -48.1f, -920.41f),
-            /* 10 (Grass - 59) */vec3(880.5f, -48.1f, -920.41f),
-            /* 11 (Grass - 66) */vec3(880.5f, -48.1f, 918.24f),
-            /* 12 (Grass - 67) */vec3(-1029.73f, -48.1f, 918.24f),
-            /* 13 (Grass - 60) */vec3(-1029.73f, 0.0f, 918.24f),
-            // Road
-            /* 14 (Road - 32) */vec3(-96.5f, 0.0f, -920.41f),
-            /* 15 (Road - 30) */vec3(-96.5f, 0.0f, -64.89f),
-            /* 16 (Road - 34) */vec3(366.22f, 0.0f, -920.41f),
-            /* 17 (Road - 25) */vec3(366.22f, 0.0f, -64.89f),
-            /* 18 (Road - 29) */vec3(47.62f, 5.0f, -104.89f),
-            /* 19 (Road - 28) */vec3(47.62f, 5.0f, -40.76f),
-            /* 20 (Road - 35) */vec3(233.2f, 5.0f, -104.89f),
-            /* 21 (Road - 27) */vec3(233.2f, 5.0f, -40.76f),
-            /* 22 ( - ) */vec3(0.0f, 0.0f, 0.0f),
-            /* 23 ( - ) */vec3(0.0f, 0.0f, 0.0f),
-            /* 24 ( - ) */vec3(0.0f, 0.0f, 0.0f),
+            // - Front
+            // - Right
+            // - Back
+            // - Left
+            // - Bottom
+            /* ? ( - ) */vec3(0.0f, 0.0f, 0.0f),
     };
     const glm::vec3 colors[] = {
             // Grass
@@ -178,21 +167,6 @@ void initializeScene() {
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
-            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
-            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
-            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
-            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
-            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
-            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
-            // Road
-            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
-            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
-            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
-            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
-            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
-            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
-            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
-            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
     };
     const GLfloat shininess[] = {
             // Grass
@@ -204,55 +178,39 @@ void initializeScene() {
             Constants::SHININESS_GRASS,
             Constants::SHININESS_GRASS,
             Constants::SHININESS_GRASS,
-            Constants::SHININESS_GRASS,
-            Constants::SHININESS_GRASS,
-            Constants::SHININESS_GRASS,
-            Constants::SHININESS_GRASS,
-            Constants::SHININESS_GRASS,
-            Constants::SHININESS_GRASS,
-            // Road
-            Constants::SHININESS_ROAD,
-            Constants::SHININESS_ROAD,
-            Constants::SHININESS_ROAD,
-            Constants::SHININESS_ROAD,
-            Constants::SHININESS_ROAD,
-            Constants::SHININESS_ROAD,
-            Constants::SHININESS_ROAD,
-            Constants::SHININESS_ROAD,
     };
-
-    // Set the normals
-    const int numNormals = sizeof(vertices) / sizeof(vec3);
-    vec3 normals[numNormals];
-    for (int i = 0; i < numNormals; i++) {
-        normals[i] = vertices[i];
-    }
-
     GLuint indices[] = {
             // Grass
-            0, 1, 2, // 43, 32, 65
+            // - Top
+            1, 0, 2, // 32, 43, 65
             1, 2, 3, // 32, 65, 30
             3, 2, 4, // 30, 65, 64
             3, 4, 5, // 30, 64, 25
             5, 4, 7, // 25, 64, 58
             5, 7, 6, // 25, 58, 34
-            0, 9, 7, // 43, 50, 58
-            9, 7, 10, // 50, 58, 59
-            7, 10, 4, // 58, 59, 64
-            7, 10, 11, // 58, 59, 66
-            7, 11, 4, // 58, 66, 64
-            4, 11, 2, // 64, 66, 65
-            11, 2, 12, // 66, 65, 67
-            2, 12, 9, // 65, 67, 50
-            9, 2, 0, // 50, 65, 43
-            11, 12, 9, // 66, 67, 50
-            9, 11, 10,// 50, 66, 59
-            // Road
-            14, 15, 16, // 32, 30, 34
-            15, 16, 17, // 30, 34, 25
-            18, 19, 20, // 29, 28, 35,
-            19, 20, 21, // 28, 35, 27
+            // - Front
+            // - Right
+            // - Back
+            // - Left
+            // - Bottom
     };
+    // Set the normals
+    const int numNormals = sizeof(vertices) / sizeof(vec3);
+    vec3 normals[numNormals];
+    const int numIndices = sizeof(indices) / sizeof(GLuint);
+    for (int i = 0; i < numIndices; i += 3) {
+        glm::vec3 A = vertices[indices[i]];
+        glm::vec3 B = vertices[indices[i + 1]];
+        glm::vec3 C = vertices[indices[i + 2]];
+
+        glm::vec3 AB = B - A;
+        glm::vec3 AC = C - A;
+        glm::vec3 ABxAC = (glm::cross(AB, AC));
+
+        normals[indices[i]] += ABxAC;
+        normals[indices[i + 1]] += ABxAC;
+        normals[indices[i + 2]] += ABxAC;
+    }
 
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
