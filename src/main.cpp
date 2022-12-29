@@ -9,7 +9,11 @@ using namespace std;
 
 GLuint shaderProgram;
 GLuint vao, vbo, ebo;
+
+// Locations - camera
 GLuint viewLocation, projLocation;
+// Locations - lighting
+GLuint viewPositionLocation, lightPositionLocation, lightColorLocation, skyColorLocation;
 
 // Camera
 const float CAMERA_FOV = 75.0f;
@@ -31,6 +35,10 @@ float lastMouseY = Constants::HEIGHT / 2.0;
 // Timing
 float deltaTime = 0.0f;
 float lastFrameTimestamp = 0.0f;
+
+// Lighting
+const glm::vec3 LIGHT_COLOR = glm::vec3(1.0f, 1.0f, 1.0f);
+glm::vec3 lightPosition = glm::vec3(1000.f, 2500.f, 1000.f);
 
 void processInput(GLFWwindow *window) {
     float cameraSpeed = static_cast<float>(MOVEMENT_SPEED * deltaTime);
@@ -124,6 +132,10 @@ void initializeShaders() {
     // Locations
     viewLocation = glGetUniformLocation(shaderProgram, "viewShader");
     projLocation = glGetUniformLocation(shaderProgram, "projectionShader");
+    viewPositionLocation = glGetUniformLocation(shaderProgram, "viewPosition");
+    lightPositionLocation = glGetUniformLocation(shaderProgram, "lightPosition");
+    lightColorLocation = glGetUniformLocation(shaderProgram, "lightColor");
+    skyColorLocation = glGetUniformLocation(shaderProgram, "skyColor");
 }
 
 void initializeScene() {
@@ -156,7 +168,7 @@ void initializeScene() {
             /* 23 ( - ) */vec3(0.0f, 0.0f, 0.0f),
             /* 24 ( - ) */vec3(0.0f, 0.0f, 0.0f),
     };
-    glm::vec3 colors[] = {
+    const glm::vec3 colors[] = {
             // Grass
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
@@ -182,7 +194,7 @@ void initializeScene() {
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
     };
-    GLfloat shininess[] = {
+    const GLfloat shininess[] = {
             // Grass
             Constants::SHININESS_GRASS,
             Constants::SHININESS_GRASS,
@@ -208,7 +220,13 @@ void initializeScene() {
             Constants::SHININESS_ROAD,
             Constants::SHININESS_ROAD,
     };
-    vec3 normals[] = {};
+
+    // Set the normals
+    const int numNormals = sizeof(vertices) / sizeof(vec3);
+    vec3 normals[numNormals];
+    for (int i = 0; i < numNormals; i++) {
+        normals[i] = vertices[i];
+    }
 
     GLuint indices[] = {
             // Grass
@@ -277,6 +295,12 @@ void render() {
     // View
     glm::mat4 view = glm::lookAtLH(cameraPos, cameraPos + cameraDirection, cameraUp);
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
+
+    // Lighting
+    glUniform3f(viewPositionLocation, cameraPos.x, cameraPos.y, cameraPos.z);
+    glUniform3f(lightPositionLocation, lightPosition.x, lightPosition.y, lightPosition.z);
+    glUniform3f(lightColorLocation, LIGHT_COLOR.x, LIGHT_COLOR.y, LIGHT_COLOR.z);
+    glUniform3f(skyColorLocation, Constants::COLOR_SKY.r, Constants::COLOR_SKY.g, Constants::COLOR_SKY.b);
 
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, 1000, GL_UNSIGNED_INT, 0);
