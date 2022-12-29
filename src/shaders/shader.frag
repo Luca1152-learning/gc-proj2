@@ -20,7 +20,7 @@ void main() {
 
     // Ambient lighting
     vec3 ambientLight = AMBIENT_STRENGTH * skyColor;
-    vec3 ambientTerm = mix(objectColor, ambientLight, 0.2f);
+    vec3 ambientTerm = ambientLight * objectColor;
 
     // Diffuse lighting
     vec3 normal = normalize(ex_Normal);

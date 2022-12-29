@@ -23,7 +23,7 @@ void main() {
 
     ex_Color = vec4(in_Color, 1.0f);
     ex_FragPos = vec3(gl_Position);
-    ex_Normal = vec3(camera * vec4(in_Normal, 1.0));
+    ex_Normal = vec3(camera * vec4(in_Normal, 0.0));
     ex_LightPosition = vec3(camera * vec4(lightPosition, 1.0f));
     ex_ViewPosition = vec3(camera * vec4(viewPosition, 1.0f));
     ex_Shininess = in_Shininess;

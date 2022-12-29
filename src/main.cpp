@@ -38,7 +38,7 @@ float lastFrameTimestamp = 0.0f;
 
 // Lighting
 const glm::vec3 LIGHT_COLOR = glm::vec3(1.0f, 1.0f, 1.0f);
-glm::vec3 lightPosition = glm::vec3(1000.f, 2500.f, 1000.f);
+glm::vec3 lightPosition = glm::vec3(1000.f, 5000.f, 2000.f);
 
 void processInput(GLFWwindow *window) {
     float cameraSpeed = static_cast<float>(MOVEMENT_SPEED * deltaTime);
