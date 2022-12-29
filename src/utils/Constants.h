@@ -27,6 +27,11 @@ public:
     static const vec3 COLOR_DOOR_KNOB;
     static const vec3 COLOR_TREE_LEAVES;
     static const vec3 COLOR_TREE_TRUNK;
+
+    // Shininess
+    static const float SHININESS_SKY;
+    static const float SHININESS_GRASS;
+    static const float SHININESS_ROAD;
 };
 
 #endif //GC_CONSTANTS_H

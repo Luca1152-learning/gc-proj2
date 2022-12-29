@@ -15,3 +15,7 @@ const vec3 Constants::COLOR_DOOR = Color::fromHex("#F1CB9F");
 const vec3 Constants::COLOR_DOOR_KNOB = Color::fromHex("#827861");
 const vec3 Constants::COLOR_TREE_LEAVES = Color::fromHex("#8CE0AE");
 const vec3 Constants::COLOR_TREE_TRUNK = Color::fromHex("#8B7F70");
+
+const float Constants::SHININESS_SKY = 256.0f;
+const float Constants::SHININESS_GRASS = 16.0f;
+const float Constants::SHININESS_ROAD = 4.0f;

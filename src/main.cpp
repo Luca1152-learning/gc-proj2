@@ -14,15 +14,15 @@ GLuint viewLocation, projLocation;
 // Camera
 const float CAMERA_FOV = 75.0f;
 const float CAMERA_NEAR_PLANE = 0.1f;
-const float CAMERA_FAR_PLANE = 500.0f;
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 250.0f);
+const float CAMERA_FAR_PLANE = 3500.0f;
+glm::vec3 cameraPos = glm::vec3(0.0f, 300.0f, -1000.0f);
 glm::vec3 cameraDirection = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 float cameraYaw = -90.0f;
 float cameraPitch = 0.0f;
 
 // Movement
-const float MOVEMENT_SPEED = 150.0f;
+const float MOVEMENT_SPEED = 200.0f;
 const float MOUSE_SENSITIVITY = 0.1f;
 bool isFirstMouseCallback = true;
 float lastMouseX = Constants::WIDTH / 2.0;
@@ -42,10 +42,10 @@ void processInput(GLFWwindow *window) {
         cameraPos -= cameraSpeed * cameraDirection;
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        cameraPos -= glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
+        cameraPos += glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        cameraPos += glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
+        cameraPos -= glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
     }
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
         cameraPos.y += cameraSpeed;
@@ -63,7 +63,7 @@ void mouseCallback(GLFWwindow *_, double dMouseX, double dMouseY) {
     if (isFirstMouseCallback) {
         isFirstMouseCallback = false;
     } else {
-        offsetX = mouseX - lastMouseX;
+        offsetX = lastMouseX - mouseX;
         offsetY = lastMouseY - mouseY;
     }
     cameraYaw += offsetX * MOUSE_SENSITIVITY;
@@ -128,23 +128,108 @@ void initializeShaders() {
 
 void initializeScene() {
     GLfloat vertices[] = {
-            //            Coordinates             |             Colors
-            -50.0f, -50.0f, -50.0f, 0.0f, 1.0f, 0.0f,
-            50.0f, -50.0f, -50.0f, 0.0f, 0.9f, 0.0f,
-            50.0f, 50.0f, -50.0f, 0.0f, 0.6f, 0.0f,
-            -50.0f, 50.0f, -50.0f, 0.0f, 0.2f, 0.0f,
-            -50.0f, -50.0f, 50.0f, 1.0f, 0.0f, 0.0f,
-            50.0f, -50.0f, 50.0f, 0.7f, 0.0f, 0.0f,
-            50.0f, 50.0f, 50.0f, 0.5f, 0.0f, 0.0f,
-            -50.0f, 50.0f, 50.0f, 0.1f, 0.0f, 0.0f,
+            //            Coordinates             |             Colors          | Shininess
+            // Grass
+            /* 0 (Grass - 43) */
+            -1029.73f, 0.0f, -920.41f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 1 (Grass - 32) */
+            -96.5f, 0.0f, -920.41f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 2 (Grass - 65) */
+            -1029.73f, 0.0f, 918.24f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 3 (Grass - 30) */
+            -96.5f, 0.0f, -64.89f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 4 (Grass - 64) */
+            880.5f, 0.0f, 918.24f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 5 (Grass - 25) */
+            366.22f, 0.0f, -64.89f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 6 (Grass - 34) */
+            366.22f, 0.0f, -920.41f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 7 (Grass - 58) */
+            880.5f, 0.0f, -920.41f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 8 (Grass - 28) */
+            47.62f, 0.0f, -40.76f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 9 (Grass - 50) */
+            -1029.73f, -48.1f, -920.41f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 10 (Grass - 59) */
+            880.5f, -48.1f, -920.41f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 11 (Grass - 66) */
+            880.5f, -48.1f, 918.24f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 12 (Grass - 67) */
+            -1029.73f, -48.1f, 918.24f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 13 (Grass - 60) */
+            -1029.73f, 0.0f, 918.24f,
+            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
+            /* 14 (Road - 32) */
+            -96.5f, 0.0f, -920.41f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 15 (Road - 30) */
+            -96.5f, 0.0f, -64.89f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 16 (Road - 34) */
+            366.22f, 0.0f, -920.41f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 17 (Road - 25) */
+            366.22f, 0.0f, -64.89f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 18 (Road - 29) */
+            47.62f, 5.0f, -104.89f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 19 (Road - 28) */
+            47.62f, 5.0f, -40.76f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 20 (Road - 35) */
+            233.2f, 5.0f, -104.89f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 21 (Road - 27) */
+            233.2f, 5.0f, -40.76f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 22 ( - ) */
+            0.0f, 0.0f, 0.0f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 23 ( - ) */
+            0.0f, 0.0f, 0.0f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 24 ( - ) */
+            0.0f, 0.0f, 0.0f,
+            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
     };
     GLuint indices[] = {
-            1, 0, 2, 2, 0, 3,  //  Bottom
-            2, 3, 6, 6, 3, 7,  // Side
-            7, 3, 4, 4, 3, 0,  // Side
-            4, 0, 5, 5, 0, 1,  // side
-            1, 2, 5, 5, 2, 6,  // Side
-            5, 6, 4, 4, 6, 7, //  Top
+            // Grass
+            0, 1, 2, // 43, 32, 65
+            1, 2, 3, // 32, 65, 30
+            3, 2, 4, // 30, 65, 64
+            3, 4, 5, // 30, 64, 25
+            5, 4, 7, // 25, 64, 58
+            5, 7, 6, // 25, 58, 34
+            0, 9, 7, // 43, 50, 58
+            9, 7, 10, // 50, 58, 59
+            7, 10, 4, // 58, 59, 64
+            7, 10, 11, // 58, 59, 66
+            7, 11, 4, // 58, 66, 64
+            4, 11, 2, // 64, 66, 65
+            11, 2, 12, // 66, 65, 67
+            2, 12, 9, // 65, 67, 50
+            9, 2, 0, // 50, 65, 43
+            11, 12, 9, // 66, 67, 50
+            9, 11, 10,// 50, 66, 59
+            // Road
+            14, 15, 16, // 32, 30, 34
+            15, 16, 17, // 30, 34, 25
+            18, 19, 20, // 29, 28, 35,
+            19, 20, 21, // 28, 35, 27
     };
 
     glGenVertexArrays(1, &vao);
@@ -159,9 +244,11 @@ void initializeScene() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0); // 0 = position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid *) 0);
     glEnableVertexAttribArray(1); // 1 = color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid *) (3 * sizeof(GLfloat)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid *) (3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(2); // 1 = shininess
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid *) (6 * sizeof(GLfloat)));
 
     glEnableVertexAttribArray(0);
 }
@@ -170,7 +257,7 @@ void render() {
     glUseProgram(shaderProgram);
 
     // Projection
-    glm::mat4 projection = glm::perspective(
+    glm::mat4 projection = glm::perspectiveLH(
             glm::radians(CAMERA_FOV),
             (float) Constants::WIDTH / (float) Constants::HEIGHT,
             CAMERA_NEAR_PLANE, CAMERA_FAR_PLANE
@@ -178,11 +265,11 @@ void render() {
     glUniformMatrix4fv(projLocation, 1, GL_FALSE, &projection[0][0]);
 
     // View
-    glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraDirection, cameraUp);
+    glm::mat4 view = glm::lookAtLH(cameraPos, cameraPos + cameraDirection, cameraUp);
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
     glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 1000, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
