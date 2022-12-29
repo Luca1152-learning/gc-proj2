@@ -1,7 +1,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include <vector>
 #include "utils/render/ShadersUtils.h"
 #include "utils/Constants.h"
 
@@ -19,7 +18,7 @@ GLFWwindow *initializeWindow() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow *window = glfwCreateWindow(Constants::WIDTH, Constants::HEIGHT, "macOS OpenGL", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(Constants::WIDTH, Constants::HEIGHT, "GraficaPeCalc - proiect 2", nullptr, nullptr);
     if (!window) {
         glfwTerminate();
         exit(EXIT_FAILURE);
