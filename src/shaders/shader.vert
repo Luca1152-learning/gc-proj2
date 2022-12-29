@@ -2,6 +2,8 @@
 
 layout (location = 0) in vec3 in_Position;
 layout (location = 1) in vec4 in_Color;
+layout (location = 2) in vec4 in_Shininess;
+layout (location = 3) in vec4 in_Normal;
 
 uniform mat4 viewShader;
 uniform mat4 projectionShader;

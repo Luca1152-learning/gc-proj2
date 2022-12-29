@@ -127,85 +127,89 @@ void initializeShaders() {
 }
 
 void initializeScene() {
-    GLfloat vertices[] = {
-            //            Coordinates             |             Colors          | Shininess
+    const vec3 vertices[] = {
             // Grass
-            /* 0 (Grass - 43) */
-            -1029.73f, 0.0f, -920.41f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 1 (Grass - 32) */
-            -96.5f, 0.0f, -920.41f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 2 (Grass - 65) */
-            -1029.73f, 0.0f, 918.24f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 3 (Grass - 30) */
-            -96.5f, 0.0f, -64.89f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 4 (Grass - 64) */
-            880.5f, 0.0f, 918.24f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 5 (Grass - 25) */
-            366.22f, 0.0f, -64.89f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 6 (Grass - 34) */
-            366.22f, 0.0f, -920.41f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 7 (Grass - 58) */
-            880.5f, 0.0f, -920.41f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 8 (Grass - 28) */
-            47.62f, 0.0f, -40.76f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 9 (Grass - 50) */
-            -1029.73f, -48.1f, -920.41f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 10 (Grass - 59) */
-            880.5f, -48.1f, -920.41f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 11 (Grass - 66) */
-            880.5f, -48.1f, 918.24f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 12 (Grass - 67) */
-            -1029.73f, -48.1f, 918.24f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 13 (Grass - 60) */
-            -1029.73f, 0.0f, 918.24f,
-            Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b, Constants::SHININESS_GRASS,
-            /* 14 (Road - 32) */
-            -96.5f, 0.0f, -920.41f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 15 (Road - 30) */
-            -96.5f, 0.0f, -64.89f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 16 (Road - 34) */
-            366.22f, 0.0f, -920.41f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 17 (Road - 25) */
-            366.22f, 0.0f, -64.89f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 18 (Road - 29) */
-            47.62f, 5.0f, -104.89f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 19 (Road - 28) */
-            47.62f, 5.0f, -40.76f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 20 (Road - 35) */
-            233.2f, 5.0f, -104.89f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 21 (Road - 27) */
-            233.2f, 5.0f, -40.76f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 22 ( - ) */
-            0.0f, 0.0f, 0.0f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 23 ( - ) */
-            0.0f, 0.0f, 0.0f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
-            /* 24 ( - ) */
-            0.0f, 0.0f, 0.0f,
-            Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b, Constants::SHININESS_ROAD,
+            /* 0 (Grass - 43) */vec3(-1029.73f, 0.0f, -920.41f),
+            /* 1 (Grass - 32) */vec3(-96.5f, 0.0f, -920.41f),
+            /* 2 (Grass - 65) */vec3(-1029.73f, 0.0f, 918.24f),
+            /* 3 (Grass - 30) */vec3(-96.5f, 0.0f, -64.89f),
+            /* 4 (Grass - 64) */vec3(880.5f, 0.0f, 918.24f),
+            /* 5 (Grass - 25) */vec3(366.22f, 0.0f, -64.89f),
+            /* 6 (Grass - 34) */vec3(366.22f, 0.0f, -920.41f),
+            /* 7 (Grass - 58) */vec3(880.5f, 0.0f, -920.41f),
+            /* 8 (Grass - 28) */vec3(47.62f, 0.0f, -40.76f),
+            /* 9 (Grass - 50) */vec3(-1029.73f, -48.1f, -920.41f),
+            /* 10 (Grass - 59) */vec3(880.5f, -48.1f, -920.41f),
+            /* 11 (Grass - 66) */vec3(880.5f, -48.1f, 918.24f),
+            /* 12 (Grass - 67) */vec3(-1029.73f, -48.1f, 918.24f),
+            /* 13 (Grass - 60) */vec3(-1029.73f, 0.0f, 918.24f),
+            // Road
+            /* 14 (Road - 32) */vec3(-96.5f, 0.0f, -920.41f),
+            /* 15 (Road - 30) */vec3(-96.5f, 0.0f, -64.89f),
+            /* 16 (Road - 34) */vec3(366.22f, 0.0f, -920.41f),
+            /* 17 (Road - 25) */vec3(366.22f, 0.0f, -64.89f),
+            /* 18 (Road - 29) */vec3(47.62f, 5.0f, -104.89f),
+            /* 19 (Road - 28) */vec3(47.62f, 5.0f, -40.76f),
+            /* 20 (Road - 35) */vec3(233.2f, 5.0f, -104.89f),
+            /* 21 (Road - 27) */vec3(233.2f, 5.0f, -40.76f),
+            /* 22 ( - ) */vec3(0.0f, 0.0f, 0.0f),
+            /* 23 ( - ) */vec3(0.0f, 0.0f, 0.0f),
+            /* 24 ( - ) */vec3(0.0f, 0.0f, 0.0f),
     };
+    glm::vec3 colors[] = {
+            // Grass
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            // Road
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+    };
+    GLfloat shininess[] = {
+            // Grass
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            // Road
+            Constants::SHININESS_ROAD,
+            Constants::SHININESS_ROAD,
+            Constants::SHININESS_ROAD,
+            Constants::SHININESS_ROAD,
+            Constants::SHININESS_ROAD,
+            Constants::SHININESS_ROAD,
+            Constants::SHININESS_ROAD,
+            Constants::SHININESS_ROAD,
+    };
+    vec3 normals[] = {};
+
     GLuint indices[] = {
             // Grass
             0, 1, 2, // 43, 32, 65
@@ -239,16 +243,22 @@ void initializeScene() {
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors) + sizeof(shininess) + sizeof(normals), vertices, GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(colors), colors);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors), sizeof(shininess), shininess);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors) + sizeof(shininess), sizeof(normals), normals);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0); // 0 = position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid *) 0);
     glEnableVertexAttribArray(1); // 1 = color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid *) (3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(2); // 1 = shininess
-    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid *) (6 * sizeof(GLfloat)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) sizeof(vertices));
+    glEnableVertexAttribArray(2); // 2 = shininess
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid *) (sizeof(vertices) + sizeof(colors)));
+    glEnableVertexAttribArray(3); // 3 = normals
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) (sizeof(vertices) + sizeof(colors) + sizeof(shininess)));
 
     glEnableVertexAttribArray(0);
 }
