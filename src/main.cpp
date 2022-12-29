@@ -26,7 +26,7 @@ float cameraYaw = -90.0f;
 float cameraPitch = 0.0f;
 
 // Movement
-const float MOVEMENT_SPEED = 200.0f;
+const float MOVEMENT_SPEED = 400.0f;
 const float MOUSE_SENSITIVITY = 0.1f;
 bool isFirstMouseCallback = true;
 float lastMouseX = Constants::WIDTH / 2.0;
@@ -163,10 +163,30 @@ void initializeScene() {
             /* 18 (Road top - 34) */vec3(366.22f, 0.0f, -920.41f),
             /* 19 (Road top - 35) */vec3(233.2f, 0.0f, -64.89f),
             // Grass front
+            /* 20 (Grass front - 43) */vec3(-1029.73f, 0.0f, -920.41f),
+            /* 21 (Grass front - 50) */vec3(-1029.73f, -48.1f, -920.41f),
+            /* 22 (Grass front - 58) */vec3(880.5f, 0.0f, -920.41f),
+            /* 23 (Grass front - 59) */vec3(880.5f, -48.1f, -920.41f),
             // Grass right
+            /* 24 (Grass right - 58) */vec3(880.5f, 0.0f, -920.41f),
+            /* 25 (Grass right - 59) */vec3(880.5f, -48.1f, -920.41f),
+            /* 26 (Grass right - 64) */vec3(880.5f, 0.0f, 918.24f),
+            /* 27 (Grass right - 66) */vec3(880.5f, -48.1f, 918.24f),
             // Grass back
+            /* 28 (Grass back - 64) */vec3(880.5f, 0.0f, 918.24f),
+            /* 29 (Grass back - 65) */vec3(-1029.73f, 0.0f, 918.24f),
+            /* 30 (Grass back - 66) */vec3(880.5f, -48.1f, 918.24f),
+            /* 31 (Grass back - 67) */vec3(-1029.73f, -48.1f, 918.24f),
             // Grass left
+            /* 32 (Grass left - 43) */vec3(-1029.73f, 0.0f, -920.41f),
+            /* 33 (Grass left - 50) */vec3(-1029.73f, -48.1f, -920.41f),
+            /* 34 (Grass left - 65) */vec3(-1029.73f, 0.0f, 918.24f),
+            /* 35 (Grass left - 67) */vec3(-1029.73f, -48.1f, 918.24f),
             // Grass bottom
+            /* 36 (Grass bottom - 50) */vec3(-1029.73f, -48.1f, -920.41f),
+            /* 37 (Grass bottom - 59) */vec3(880.5f, -48.1f, -920.41f),
+            /* 38 (Grass bottom - 66) */vec3(880.5f, -48.1f, 918.24f),
+            /* 39 (Grass bottom - 67) */vec3(-1029.73f, -48.1f, 918.24f),
             /* ? ( - ) */vec3(0.0f, 0.0f, 0.0f),
     };
     const glm::vec3 colors[] = {
@@ -191,6 +211,26 @@ void initializeScene() {
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
+            vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
     };
     const GLfloat shininess[] = {
             // Grass
@@ -214,6 +254,26 @@ void initializeScene() {
             Constants::SHININESS_ROAD,
             Constants::SHININESS_ROAD,
             Constants::SHININESS_ROAD,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
+            Constants::SHININESS_GRASS,
     };
     GLuint indices[] = {
             // Grass top
@@ -233,10 +293,20 @@ void initializeScene() {
             19, 15, 14, // 35, 29, 28
             19, 14, 13, // 35, 28, 27
             // Grass front
+            23, 21, 20, // 50, 50, 43
+            23, 20, 22, // 59, 43, 58
             // Grass right
+            27, 25, 24, // 66, 59, 58
+            27, 24, 26, // 66, 58, 64
             // Grass back
+            31, 30, 28, // 67, 66, 64
+            31, 28, 29, // 67, 64, 65
             // Grass left
+            33, 35, 34, // 50, 67, 65
+            33, 34, 32, // 50, 65, 43
             // Grass bottom
+            38, 39, 36, // 66, 67, 50
+            38, 36, 37, // 66, 50, 59
     };
     // Set the normals
     const int numNormals = sizeof(vertices) / sizeof(vec3);
