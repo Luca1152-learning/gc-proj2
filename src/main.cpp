@@ -212,7 +212,7 @@ int main() {
 
         // Render
         glViewport(0, 0, width, height);
-        glClearColor(Constants::SKY_COLOR.r, Constants::SKY_COLOR.g, Constants::SKY_COLOR.b, 1.0f);
+        glClearColor(Constants::COLOR_SKY.r, Constants::COLOR_SKY.g, Constants::COLOR_SKY.b, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
 

@@ -14,12 +14,19 @@ public:
     static const int WIDTH;
     static const int HEIGHT;
 
-    // Matrices
-    static const mat4 RESIZE_MATRIX;
-    static GLuint MATRIX_LOCATION;
-
     // Colors
-    static const vec3 SKY_COLOR;
+    static const vec3 COLOR_SKY;
+    static const vec3 COLOR_GRASS;
+    static const vec3 COLOR_ROAD;
+    static const vec3 COLOR_WALLS;
+    static const vec3 COLOR_ROOF;
+    static const vec3 COLOR_FRAMES;
+    static const vec3 COLOR_WINDOWS;
+    static const vec3 COLOR_CHIMNEY;
+    static const vec3 COLOR_DOOR;
+    static const vec3 COLOR_DOOR_KNOB;
+    static const vec3 COLOR_TREE_LEAVES;
+    static const vec3 COLOR_TREE_TRUNK;
 };
 
 #endif //GC_CONSTANTS_H
