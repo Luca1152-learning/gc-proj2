@@ -7,7 +7,8 @@
 using namespace glm;
 using namespace std;
 
-GLuint shaderProgramId;
+GLuint vao, vbo, ebo;
+GLuint shaderProgram;
 
 GLFWwindow *initializeWindow() {
     if (!glfwInit()) {
@@ -18,7 +19,8 @@ GLFWwindow *initializeWindow() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow *window = glfwCreateWindow(Constants::WIDTH, Constants::HEIGHT, "GraficaPeCalc - proiect 2", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(Constants::WIDTH, Constants::HEIGHT, "GraficaPeCalc - proiect 2", nullptr,
+                                          nullptr);
     if (!window) {
         glfwTerminate();
         exit(EXIT_FAILURE);
@@ -32,16 +34,49 @@ GLFWwindow *initializeWindow() {
 }
 
 void initializeShaders() {
-    shaderProgramId = ShadersUtils::loadShaders("../src/shaders/shader.vert", "../src/shaders/shader.frag");
-    Constants::MATRIX_LOCATION = glGetUniformLocation(shaderProgramId, "matrix");
+    shaderProgram = ShadersUtils::loadShaders("../src/shaders/shader.vert", "../src/shaders/shader.frag");
+    Constants::MATRIX_LOCATION = glGetUniformLocation(shaderProgram, "matrix");
+}
+
+
+void initializeScene() {
+    GLfloat vertices[] = {
+            0.5f, 0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            -0.5f, -0.5f, 0.0f,
+            -0.5f, 0.5f, 0.0f
+    };
+    GLuint indices[] = {
+            0, 1, 3,
+            1, 2, 3
+    };
+
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo);
+    glGenBuffers(1, &ebo);
+
+    glBindVertexArray(vao);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
+
+    glEnableVertexAttribArray(0);
 }
 
 void render() {
-    glUseProgram(shaderProgramId);
+    glUseProgram(shaderProgram);
+
+    glBindVertexArray(vao);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
 }
 
 void cleanUp() {
-    glDeleteProgram(shaderProgramId);
+    glDeleteProgram(shaderProgram);
 
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(0);
@@ -50,6 +85,7 @@ void cleanUp() {
 int main() {
     GLFWwindow *window = initializeWindow();
     initializeShaders();
+    initializeScene();
 
     while (!glfwWindowShouldClose(window)) {
         int width, height;
