@@ -11,18 +11,72 @@ GLuint shaderProgram;
 GLuint vao, vbo, ebo;
 GLuint viewLocation, projLocation;
 
-// View matrix
-glm::mat4 view;
-float obsX = -Constants::WIDTH / 2.0f, obsY = -Constants::HEIGHT / 2.0f, obsZ = 300.f;
-float refX = 0.0f, refY = 0.0f, refZ = -100.f;
-float vX = 0.0f;
+// Camera
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 250.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-// Projection matrix
-glm::mat4 projection;
-float xMin = 0.0f, xMax = Constants::WIDTH, yMin = 0.0f, yMax = Constants::HEIGHT;
-float dNear = 100.0f, dFar = 500.0f;
+const float FOV = 75.0f;
 
-glm::vec3 observer, referencePoint, vertical;
+bool firstMouse = true;
+float yaw = -90.0f;
+float pitch = 0.0f;
+float lastX = 800.0f / 2.0;
+float lastY = 600.0 / 2.0;
+
+// Timing
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+
+void processInput(GLFWwindow *window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+
+    float cameraSpeed = static_cast<float>(200.5 * deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        cameraPos += cameraSpeed * cameraFront;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        cameraPos -= cameraSpeed * cameraFront;
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+}
+
+void mouseCallback(GLFWwindow *window, double xposIn, double yposIn) {
+    float xpos = static_cast<float>(xposIn);
+    float ypos = static_cast<float>(yposIn);
+
+    if (firstMouse) {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+    lastX = xpos;
+    lastY = ypos;
+
+    float sensitivity = 0.1f; // change this value to your liking
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+
+    yaw += xoffset;
+    pitch += yoffset;
+
+    // make sure that when pitch is out of bounds, screen doesn't get flipped
+    if (pitch > 89.0f)
+        pitch = 89.0f;
+    if (pitch < -89.0f)
+        pitch = -89.0f;
+
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(front);
+}
 
 GLFWwindow *initializeWindow() {
     if (!glfwInit()) {
@@ -33,14 +87,21 @@ GLFWwindow *initializeWindow() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow *window = glfwCreateWindow(Constants::WIDTH, Constants::HEIGHT, "GraficaPeCalc - proiect 2", nullptr,
-                                          nullptr);
+    GLFWwindow *window = glfwCreateWindow(
+            Constants::WIDTH, Constants::HEIGHT,
+            "GraficaPeCalc - proiect 2",
+            nullptr, nullptr
+    );
     if (!window) {
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
 
     glfwMakeContextCurrent(window);
+    glfwSetCursorPosCallback(window, mouseCallback);
+    // Capture the mouse
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
     glewInit();
     glfwSwapInterval(1);
 
@@ -48,7 +109,10 @@ GLFWwindow *initializeWindow() {
 }
 
 void initializeShaders() {
-    shaderProgram = ShadersUtils::loadShaders("../src/shaders/shader.vert", "../src/shaders/shader.frag");
+    shaderProgram = ShadersUtils::loadShaders(
+            "../src/shaders/shader.vert",
+            "../src/shaders/shader.frag"
+    );
 
     // Locations
     viewLocation = glGetUniformLocation(shaderProgram, "viewShader");
@@ -98,19 +162,17 @@ void initializeScene() {
 void render() {
     glUseProgram(shaderProgram);
 
-    // View matrix
-    observer = glm::vec3(obsX, obsY, obsZ);
-    refX = obsX;
-    refY = obsY;
-    referencePoint = glm::vec3(refX, refY, refZ);
-    vertical = glm::vec3(vX, 1.0f, 0.0f);
-    view = glm::lookAt(observer, referencePoint, vertical);
-    glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
-
-    // Projection matrix
-    projection = glm::ortho(xMin, xMax, yMin, yMax, dNear, dFar);
+    // Projection
+    glm::mat4 projection = glm::perspective(
+            glm::radians(FOV),
+            (float) Constants::WIDTH / (float) Constants::HEIGHT,
+            0.1f, 600.0f
+    );
     glUniformMatrix4fv(projLocation, 1, GL_FALSE, &projection[0][0]);
 
+    // View
+    glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+    glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -133,6 +195,15 @@ int main() {
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
 
+        // Input
+        processInput(window);
+
+        // Timing
+        float currentFrame = static_cast<float>(glfwGetTime());
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
+        // Render
         glViewport(0, 0, width, height);
         glClearColor(Constants::SKY_COLOR.r, Constants::SKY_COLOR.g, Constants::SKY_COLOR.b, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
