@@ -12,70 +12,71 @@ GLuint vao, vbo, ebo;
 GLuint viewLocation, projLocation;
 
 // Camera
+const float CAMERA_FOV = 75.0f;
+const float CAMERA_NEAR_PLANE = 0.1f;
+const float CAMERA_FAR_PLANE = 500.0f;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 250.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraDirection = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+float cameraYaw = -90.0f;
+float cameraPitch = 0.0f;
 
-const float FOV = 75.0f;
-
-bool firstMouse = true;
-float yaw = -90.0f;
-float pitch = 0.0f;
-float lastX = 800.0f / 2.0;
-float lastY = 600.0 / 2.0;
+// Movement
+const float MOVEMENT_SPEED = 150.0f;
+const float MOUSE_SENSITIVITY = 0.1f;
+bool isFirstMouseCallback = true;
+float lastMouseX = Constants::WIDTH / 2.0;
+float lastMouseY = Constants::HEIGHT / 2.0;
 
 // Timing
 float deltaTime = 0.0f;
-float lastFrame = 0.0f;
+float lastFrameTimestamp = 0.0f;
 
 void processInput(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    float cameraSpeed = static_cast<float>(MOVEMENT_SPEED * deltaTime);
 
-    float cameraSpeed = static_cast<float>(200.5 * deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        cameraPos += cameraSpeed * cameraFront;
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        cameraPos -= cameraSpeed * cameraFront;
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        cameraPos += cameraSpeed * cameraDirection;
+    }
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+        cameraPos -= cameraSpeed * cameraDirection;
+    }
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+        cameraPos -= glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
+    }
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+        cameraPos += glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
+    }
 }
 
-void mouseCallback(GLFWwindow *window, double xposIn, double yposIn) {
-    float xpos = static_cast<float>(xposIn);
-    float ypos = static_cast<float>(yposIn);
+void mouseCallback(GLFWwindow *_, double dMouseX, double dMouseY) {
+    float mouseX = static_cast<float>(dMouseX);
+    float mouseY = static_cast<float>(dMouseY);
 
-    if (firstMouse) {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
+    float offsetX = 0.0f, offsetY = 0.0f;
+    if (isFirstMouseCallback) {
+        isFirstMouseCallback = false;
+    } else {
+        offsetX = mouseX - lastMouseX;
+        offsetY = lastMouseY - mouseY;
+    }
+    cameraYaw += offsetX * MOUSE_SENSITIVITY;
+    cameraPitch += offsetY * MOUSE_SENSITIVITY;
+
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+
+    // Limit the cameraPitch
+    if (cameraPitch > 89.0f) {
+        cameraPitch = 89.0f;
+    } else if (cameraPitch < -89.0f) {
+        cameraPitch = -89.0f;
     }
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-    lastX = xpos;
-    lastY = ypos;
-
-    float sensitivity = 0.1f; // change this value to your liking
-    xoffset *= sensitivity;
-    yoffset *= sensitivity;
-
-    yaw += xoffset;
-    pitch += yoffset;
-
-    // make sure that when pitch is out of bounds, screen doesn't get flipped
-    if (pitch > 89.0f)
-        pitch = 89.0f;
-    if (pitch < -89.0f)
-        pitch = -89.0f;
-
-    glm::vec3 front;
-    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front.y = sin(glm::radians(pitch));
-    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    cameraFront = glm::normalize(front);
+    cameraDirection.x = cos(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
+    cameraDirection.y = sin(glm::radians(cameraPitch));
+    cameraDirection.z = sin(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
+    cameraDirection = glm::normalize(cameraDirection);
 }
 
 GLFWwindow *initializeWindow() {
@@ -98,9 +99,9 @@ GLFWwindow *initializeWindow() {
     }
 
     glfwMakeContextCurrent(window);
-    glfwSetCursorPosCallback(window, mouseCallback);
-    // Capture the mouse
+    // Mouse input
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(window, mouseCallback);
 
     glewInit();
     glfwSwapInterval(1);
@@ -164,14 +165,14 @@ void render() {
 
     // Projection
     glm::mat4 projection = glm::perspective(
-            glm::radians(FOV),
+            glm::radians(CAMERA_FOV),
             (float) Constants::WIDTH / (float) Constants::HEIGHT,
-            0.1f, 600.0f
+            CAMERA_NEAR_PLANE, CAMERA_FAR_PLANE
     );
     glUniformMatrix4fv(projLocation, 1, GL_FALSE, &projection[0][0]);
 
     // View
-    glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+    glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraDirection, cameraUp);
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
     glBindVertexArray(vao);
@@ -200,8 +201,8 @@ int main() {
 
         // Timing
         float currentFrame = static_cast<float>(glfwGetTime());
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
+        deltaTime = currentFrame - lastFrameTimestamp;
+        lastFrameTimestamp = currentFrame;
 
         // Render
         glViewport(0, 0, width, height);
