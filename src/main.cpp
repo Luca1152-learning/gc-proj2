@@ -911,6 +911,10 @@ void initializeScene() {
             188, 186, 187, // 10, 8, 9
             186, 193, 187, // 8, 15, 9
     };
+
+    // TODO - create special function for ^ and a function for the tree (which should return vertices,
+    // TODO - colors and shininess)
+
     // Set the normals
     const int numNormals = sizeof(vertices) / sizeof(vec3);
     vec3 normals[numNormals];
