@@ -259,6 +259,56 @@ void initializeScene() {
             /* 99 (Door frame - top - 46) */vec3(47.62f, 300.27f, -77.59f),
             /* 100 (Door frame - top - 53) */vec3(233.2f, 300.27f, -40.76f),
             /* 101 (Door frame - top - 55) */vec3(233.2f, 300.27f, -77.59f),
+            // Window - bottom left
+            /* 102 (Window - bottom left - 4) */vec3(75.52f, 559.77f, -40.76f),
+            /* 103 (Window - bottom left - 5) */vec3(135.49f, 559.77f, -40.76f),
+            /* 104 (Window - bottom left - 6) */vec3(75.52f, 466.78f, -40.76f),
+            /* 105 (Window - bottom left - 7) */vec3(135.49f, 466.78f, -40.76f),
+            // Window - bottom right
+            /* 106 (Window - bottom right - 4) */vec3(150.1f, 559.77f, -40.76f),
+            /* 107 (Window - bottom right - 5) */vec3(210.14f, 559.77f, -40.76f),
+            /* 108 (Window - bottom right - 6) */vec3(150.1f, 466.78f, -40.76f),
+            /* 109 (Window - bottom right - 7) */vec3(210.14f, 466.78f, -40.76f),
+            // Window - top left
+            /* 110 (Window - top left - 4) */vec3(75.52f, 665.7f, -40.76f),
+            /* 111 (Window - top left - 5) */vec3(135.49f, 665.7f, -40.76f),
+            /* 112 (Window - top left - 6) */vec3(75.52f, 572.41f, -40.76f),
+            /* 113 (Window - top left - 7) */vec3(135.49f, 572.41f, -40.76f),
+            // Window - top right
+            /* 114 (Window - top right - 4) */vec3(150.1f, 665.7f, -40.76f),
+            /* 115 (Window - top right - 5) */vec3(210.14f, 665.7f, -40.76f),
+            /* 116 (Window - top right - 6) */vec3(150.1f, 572.41f, -40.76f),
+            /* 117 (Window - top right - 7) */vec3(210.14f, 572.41f, -40.76f),
+            // Window - inner frame - front
+            /* 118 (Window - inner frame - front - 37) */vec3(150.1f, 559.77f, -59.17f),
+            /* 119 (Window - inner frame - front - 39) */vec3(150.1f, 466.78f, -59.17f),
+            /* 120 (Window - inner frame - front - 54) */vec3(135.49f, 466.78f, -59.17f),
+            /* 121 (Window - inner frame - front - 55) */vec3(135.49f, 559.77f, -59.17f),
+            /* 122 (Window - inner frame - front - 66) */vec3(75.52f, 559.77f, -59.17f),
+            /* 123 (Window - inner frame - front - 81) */vec3(210.14f, 559.77f, -59.17f),
+            /* 124 (Window - inner frame - front - 93) */vec3(210.14f, 572.41f, -59.17f),
+            /* 125 (Window - inner frame - front - 102) */vec3(150.1f, 665.7f, -59.17f),
+            /* 126 (Window - inner frame - front - 103) */vec3(150.1f, 572.41f, -59.17f),
+            /* 127 (Window - inner frame - front - 111) */vec3(135.49f, 665.7f, -59.17f),
+            /* 128 (Window - inner frame - front - 117) */vec3(135.49f, 572.41f, -59.17f),
+            /* 129 (Window - inner frame - front - 119) */vec3(75.52f, 572.41f, -59.17f),
+            // Window - inner frame - bottom
+            /* 130 (Window - inner frame - bottom - 21) */vec3(150.1f, 466.78f, -40.76f),
+            /* 131 (Window - inner frame - bottom - 39) */vec3(150.1f, 466.78f, -59.17f),
+            /* 132 (Window - inner frame - bottom - 52) */vec3(135.49f, 466.78f, -40.76f),
+            /* 133 (Window - inner frame - bottom - 54) */vec3(135.49f, 466.78f, -59.17f),
+            /* 134 (Window - inner frame - bottom - 65) */vec3(75.52f, 466.78f, -40.76f),
+            /* 135 (Window - inner frame - bottom - 67) */vec3(75.52f, 466.78f, -77.59f),
+            /* 136 (Window - inner frame - bottom - 82) */vec3(210.14f, 466.78f, -40.76f),
+            /* 137 (Window - inner frame - bottom - 84) */vec3(210.14f, 466.78f, -77.59f),
+            /* 138 (Window - inner frame - bottom - 92) */vec3(210.14f, 572.41f, -40.76f),
+            /* 139 (Window - inner frame - bottom - 93) */vec3(210.14f, 572.41f, -59.17f),
+            /* 140 (Window - inner frame - bottom - 101) */vec3(150.1f, 572.41f, -40.76f),
+            /* 141 (Window - inner frame - bottom - 103) */vec3(150.1f, 572.41f, -59.17f),
+            /* 142 (Window - inner frame - bottom - 116) */vec3(135.49f, 572.41f, -40.76f),
+            /* 143 (Window - inner frame - bottom - 117) */vec3(135.49f, 572.41f, -59.17f),
+            /* 144 (Window - inner frame - bottom - 118) */vec3(75.52f, 572.41f, -40.76f),
+            /* 145 (Window - inner frame - bottom - 119) */vec3(75.52f, 572.41f, -59.17f),
     };
     const glm::vec3 colors[] = {
             // Grass
@@ -336,6 +386,50 @@ void initializeScene() {
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
@@ -469,6 +563,50 @@ void initializeScene() {
             Constants::SHININESS_FRAMES,
             Constants::SHININESS_FRAMES,
             Constants::SHININESS_FRAMES,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_WINDOWS,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
     };
     GLuint indices[] = {
             // Grass top
@@ -552,7 +690,38 @@ void initializeScene() {
             // Door frame - top
             101, 100, 99, // 55, 53, 46
             100, 98, 99, // 53, 46, 44
-
+            // Window - bottom left
+            102, 105, 104, // 4, 7, 6
+            103, 105, 102, // 5, 7, 4
+            // Window - bottom right
+            106, 109, 108, // 4, 7, 6
+            107, 109, 106, // 5, 7, 4
+            // Window - top left
+            110, 113, 112, // 4, 7, 6
+            111, 113, 110, // 5, 7, 4
+            // Window - top right
+            114, 117, 116, // 4, 7, 6
+            115, 117, 114, // 5, 7, 4
+            // Window - inner frame - front
+            125, 127, 128, // 102, 111, 117
+            125, 128, 126, // 102, 117, 103
+            124, 129, 122, // 93, 119, 66
+            124, 122, 121, // 93, 66, 55
+            124, 121, 118, // 93, 55, 37
+            124, 118, 123, // 93, 37, 81
+            118, 121, 120, // 37, 55, 54
+            118, 120, 119, // 37, 54, 39
+            // Window - inner frame - bottom
+            138, 139, 140, // 92, 93, 101
+            141, 140, 139, // 93, 101, 103
+            142, 143, 144, // 116, 117, 118
+            145, 144, 143, // 117, 118, 119
+            136, 137, 130, // 82, 84, 21
+            131, 130, 137, // 84, 21, 39
+            133, 131, 137, // 84, 39, 54
+            135, 133, 137, // 84, 54, 67
+            133, 134, 132, // 52, 54, 65
+            135, 134, 133, // 54, 65, 67
     };
     // Set the normals
     const int numNormals = sizeof(vertices) / sizeof(vec3);

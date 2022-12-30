@@ -34,6 +34,7 @@ public:
     static const float SHININESS_WALLS;
     static const float SHININESS_DOOR;
     static const float SHININESS_FRAMES;
+    static const float SHININESS_WINDOWS;
 };
 
 #endif //GC_CONSTANTS_H
