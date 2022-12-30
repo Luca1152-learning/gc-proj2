@@ -217,6 +217,48 @@ void initializeScene() {
             /* 63 (House left - 76) */vec3(-224.47f, 0.0f, 636.31f),
             /* 64 (House left - 79) */vec3(-224.47f, 0.0f, -64.89f),
             /* 65 (House left - 81) */vec3(-224.47f, 466.78f, -64.89f),
+            // Door
+            /* 66 (Door - 4) */vec3(47.62f, 300.27f, -40.76f),
+            /* 67 (Door - 5) */vec3(233.2f, 300.27f, -40.76f),
+            /* 68 (Door - 6) */vec3(47.62f, 0.0f, -40.76f),
+            /* 69 (Door - 7) */vec3(233.2f, 0.0f, -40.76f),
+            // Door frame - front
+            /* 70 (Door frame - front - 23) */vec3(249.36f, 0.0f, -77.59f),
+            /* 71 (Door frame - front - 29) */vec3(249.36f, 316.43f, -77.59f),
+            /* 72 (Door frame - front - 38) */vec3(31.46f, 0.0f, -77.59f),
+            /* 73 (Door frame - front - 39) */vec3(31.46f, 316.43f, -77.59f),
+            /* 74 (Door frame - front - 46) */vec3(47.62f, 300.27f, -77.59f),
+            /* 75 (Door frame - front - 47) */vec3(47.62f, 0.0f, -77.59f),
+            /* 76 (Door frame - front - 54) */vec3(233.2f, 0.0f, -77.59f),
+            /* 77 (Door frame - front - 55) */vec3(233.2f, 300.27f, -77.59f),
+            // Door frame - top
+            /* 78 (Door frame - top - 28) */vec3(249.36f, 316.43f, -64.89f),
+            /* 79 (Door frame - top - 29) */vec3(249.36f, 316.43f, -77.59f),
+            /* 80 (Door frame - top - 37) */vec3(31.46f, 316.43f, -64.89f),
+            /* 81 (Door frame - top - 39) */vec3(31.46f, 316.43f, -77.59f),
+            // Door frame - left
+            /* 82 (Door frame - left - 36) */vec3(31.46f, 0.0f, -64.89f),
+            /* 83 (Door frame - left - 37) */vec3(31.46f, 316.43f, -64.89f),
+            /* 84 (Door frame - left - 38) */vec3(31.46f, 0.0f, -77.59f),
+            /* 85 (Door frame - left - 39) */vec3(31.46f, 316.43f, -77.59f),
+            /* 86 (Door frame - left - 52) */vec3(233.2f, 0.0f, -40.76f),
+            /* 87 (Door frame - left - 53) */vec3(233.2f, 300.27f, -40.76f),
+            /* 88 (Door frame - left - 54) */vec3(233.2f, 0.0f, -77.59f),
+            /* 89 (Door frame - left - 55) */vec3(233.2f, 300.27f, -77.59f),
+            // Door frame - right
+            /* 90 (Door frame - right - 21) */vec3(249.36f, 0.0f, -64.89f),
+            /* 91 (Door frame - right - 23) */vec3(249.36f, 0.0f, -77.59f),
+            /* 92 (Door frame - right - 28) */vec3(249.36f, 316.43f, -64.89f),
+            /* 93 (Door frame - right - 29) */vec3(249.36f, 316.43f, -77.59f),
+            /* 94 (Door frame - right - 44) */vec3(47.62f, 300.27f, -40.76f),
+            /* 95 (Door frame - right - 45) */vec3(47.62f, 0.0f, -40.76f),
+            /* 96 (Door frame - right - 46) */vec3(47.62f, 300.27f, -77.59f),
+            /* 97 (Door frame - right - 47) */vec3(47.62f, 0.0f, -77.59f),
+            // Door frame - top
+            /* 98 (Door frame - top - 44) */vec3(47.62f, 300.27f, -40.76f),
+            /* 99 (Door frame - top - 46) */vec3(47.62f, 300.27f, -77.59f),
+            /* 100 (Door frame - top - 53) */vec3(233.2f, 300.27f, -40.76f),
+            /* 101 (Door frame - top - 55) */vec3(233.2f, 300.27f, -77.59f),
     };
     const glm::vec3 colors[] = {
             // Grass
@@ -286,6 +328,42 @@ void initializeScene() {
             vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
             vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
             vec3(Constants::COLOR_WALLS.r, Constants::COLOR_WALLS.g, Constants::COLOR_WALLS.b),
+            vec3(Constants::COLOR_DOOR.r, Constants::COLOR_DOOR.g, Constants::COLOR_DOOR.b),
+            vec3(Constants::COLOR_DOOR.r, Constants::COLOR_DOOR.g, Constants::COLOR_DOOR.b),
+            vec3(Constants::COLOR_DOOR.r, Constants::COLOR_DOOR.g, Constants::COLOR_DOOR.b),
+            vec3(Constants::COLOR_DOOR.r, Constants::COLOR_DOOR.g, Constants::COLOR_DOOR.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
     };
     const GLfloat shininess[] = {
             // Grass
@@ -355,6 +433,42 @@ void initializeScene() {
             Constants::SHININESS_WALLS,
             Constants::SHININESS_WALLS,
             Constants::SHININESS_WALLS,
+            Constants::SHININESS_DOOR,
+            Constants::SHININESS_DOOR,
+            Constants::SHININESS_DOOR,
+            Constants::SHININESS_DOOR,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
     };
     GLuint indices[] = {
             // Grass top
@@ -412,6 +526,32 @@ void initializeScene() {
             // House left
             64, 63, 62, // 79, 76, 74
             64, 62, 65, // 79, 74, 81
+            // Door
+            67, 68, 66, // 5, 6, 4
+            67, 69, 68, // 5, 7, 6
+            // Door frame - front
+            74, 75, 73, // 46, 47, 39
+            73, 75, 72, // 39, 47, 38
+            71, 74, 73, // 29, 46, 39
+            71, 77, 74, // 29, 55, 46
+            71, 76, 77, // 29, 54, 55
+            71, 70, 76, // 29, 23, 54
+            // Door frame - top
+            79, 80, 81, // 29, 37, 39
+            78, 80, 79, // 28, 29, 37
+            // Door frame - left
+            85, 84, 83, // 39, 38, 37
+            83, 84, 82, // 37, 38, 36
+            89, 88, 87, // 55, 54, 53
+            87, 88, 86, // 53, 54, 52
+            // Door frame - right
+            90, 93, 91, // 21, 29, 23
+            92, 90, 93, // 28, 21, 29
+            96, 95, 97, // 46, 45, 47
+            94, 95, 96, // 44, 45, 46
+            // Door frame - top
+            101, 100, 99, // 55, 53, 46
+            100, 98, 99, // 53, 46, 44
 
     };
     // Set the normals
@@ -439,7 +579,7 @@ void initializeScene() {
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors) + sizeof(shininess) + sizeof(normals), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors) + sizeof(shininess) + sizeof(normals), NULL, GL_STATIC_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
     glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(colors), colors);
     glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors), sizeof(shininess), shininess);
@@ -481,7 +621,7 @@ void render() {
     glUniform3f(skyColorLocation, Constants::COLOR_SKY.r, Constants::COLOR_SKY.g, Constants::COLOR_SKY.b);
 
     glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, 1000, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 2000, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
