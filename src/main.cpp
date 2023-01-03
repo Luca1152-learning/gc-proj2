@@ -12,9 +12,17 @@ using namespace std;
 struct Mesh {
     vector<vec3> vertices;
     vector<vec3> colors;
-    vector<GLfloat> shininess;
+    vector<GLfloat> shininesses;
     vector<GLuint> indices;
     vector<vec3> normals;
+
+    Mesh(vector<vec3> vertices, vector<vec3> colors, vector<GLfloat> shininesses, vector<GLuint> indices, vector<vec3> normals) {
+        this->vertices = vertices;
+        this->colors = colors;
+        this->shininesses = shininesses;
+        this->indices = indices;
+        this->normals = normals;
+    }
 };
 
 GLuint shaderProgram;
@@ -784,7 +792,7 @@ Mesh createPlatformAndHouseMesh() {
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
     };
-    const vector<GLfloat> shininess = {
+    const vector<GLfloat> shininesses = {
             // Grass
             Constants::SHININESS_GRASS,
             Constants::SHININESS_GRASS,
@@ -1324,30 +1332,108 @@ Mesh createPlatformAndHouseMesh() {
         normals[indices[i + 2]] = ABxAC;
     }
 
-    Mesh mesh;
-    mesh.vertices = vertices;
-    mesh.colors = colors;
-    mesh.shininess = shininess;
-    mesh.indices = indices;
-    mesh.normals = normals;
+    return Mesh(vertices, colors, shininesses, indices, normals);
+}
 
-    return mesh;
+Mesh createSphereMesh(GLuint firstIndex, float radius, vec3 color, float shininess) {
+    const auto NUM_PARALLELS = 10;
+    const auto NUM_MERIDIANS = 20;
+
+    const auto U_MIN = -M_PI / 2;
+    const auto U_MAX = M_PI / 2;
+    const auto STEP_U = (U_MAX - U_MIN) / NUM_PARALLELS;
+
+    const auto V_MIN = 0;
+    const auto V_MAX = 2 * M_PI;
+    const auto STEP_V = (V_MAX - V_MIN) / NUM_MERIDIANS;
+
+    vector<vec3> vertices((NUM_PARALLELS + 1) * NUM_MERIDIANS);
+    vector<vec3> colors((NUM_PARALLELS + 1) * NUM_MERIDIANS);
+    vector<GLfloat> shininesses((NUM_PARALLELS + 1) * NUM_MERIDIANS);
+    vector<vec3> normals((NUM_PARALLELS + 1) * NUM_MERIDIANS);
+    vector<GLuint> indices(2 * (NUM_PARALLELS + 1) * NUM_MERIDIANS + 6 * (NUM_PARALLELS + 1) * NUM_MERIDIANS);
+
+    for (auto meridian = 0; meridian < NUM_MERIDIANS; meridian++) {
+        for (auto parallel = 0; parallel < NUM_PARALLELS + 1; parallel++) {
+            const auto u = U_MIN + parallel * STEP_U;
+            const auto v = V_MIN + meridian * STEP_V;
+            const auto x = radius * cosf(u) * cosf(v);
+            const auto y = radius * cosf(u) * sinf(v);
+            const auto z = radius * sinf(u) + 0.05 * radius * rand() / RAND_MAX;
+
+            const auto vertexIndex = meridian * (NUM_PARALLELS + 1) + parallel;
+            vertices[vertexIndex] = vec3(x, y, z);
+            colors[vertexIndex] = color;
+            shininesses[vertexIndex] = shininess;
+            normals[vertexIndex] = vec3(x, y, z);
+            indices[vertexIndex] = firstIndex + vertexIndex;
+
+            const auto shiftA = parallel * (NUM_MERIDIANS) + meridian;
+            indices[shiftA + (NUM_PARALLELS + 1) * NUM_MERIDIANS] = firstIndex + vertexIndex;
+
+            if ((parallel + 1) % (NUM_PARALLELS + 1) != 0) {
+                const auto indexA = vertexIndex;
+                auto indexB = vertexIndex + (NUM_PARALLELS + 1);
+                auto indexC = indexB + 1;
+                const auto indexD = vertexIndex + 1;
+                if (meridian == NUM_MERIDIANS - 1) {
+                    indexB = indexB % (NUM_PARALLELS + 1);
+                    indexC = indexC % (NUM_PARALLELS + 1);
+                }
+
+                const auto SHIFT_B = 2 * (NUM_PARALLELS + 1) * NUM_MERIDIANS;
+                indices[SHIFT_B + 6 * vertexIndex] = firstIndex + indexA;
+                indices[SHIFT_B + 6 * vertexIndex + 1] = firstIndex + indexB;
+                indices[SHIFT_B + 6 * vertexIndex + 2] = firstIndex + indexC;
+
+                indices[SHIFT_B + 6 * vertexIndex + 3] = firstIndex + indexA;
+                indices[SHIFT_B + 6 * vertexIndex + 4] = firstIndex + indexC;
+                indices[SHIFT_B + 6 * vertexIndex + 5] = firstIndex +  indexD;
+            }
+        }
+    }
+
+    return Mesh(vertices, colors, shininesses, indices, normals);
+}
+
+Mesh createCylinder(GLuint firstIndex) {
+
+}
+
+Mesh createTreeMesh(GLuint firstIndex) {
+    vector<vec3> vertices;
+    vector<vec3> colors;
+    vector<GLfloat> shininesses;
+    vector<vec3> normals;
+    vector<GLuint> indices;
+
+    const auto sphereMesh = createSphereMesh(firstIndex, 300.0f, Constants::COLOR_TREE_LEAVES, 4.0f);
+    vertices.insert(vertices.end(), sphereMesh.vertices.begin(), sphereMesh.vertices.end());
+    colors.insert(colors.end(), sphereMesh.colors.begin(), sphereMesh.colors.end());
+    shininesses.insert(shininesses.end(), sphereMesh.shininesses.begin(), sphereMesh.shininesses.end());
+    normals.insert(normals.end(), sphereMesh.normals.begin(), sphereMesh.normals.end());
+    indices.insert(indices.end(), sphereMesh.indices.begin(), sphereMesh.indices.end());
+
+    return Mesh(vertices, colors, shininesses, indices, normals);
 }
 
 void initializeScene() {
+    const auto platformAndHouseMesh = createPlatformAndHouseMesh();
+    const auto treeMesh = createTreeMesh(platformAndHouseMesh.vertices.size());
     vector<Mesh> meshes = {
-            createPlatformAndHouseMesh()
+            platformAndHouseMesh,
+            treeMesh
     };
 
     vector<vec3> vertices;
     vector<vec3> colors;
-    vector<GLfloat> shininess;
+    vector<GLfloat> shininesses;
     vector<GLuint> indices;
     vector<vec3> normals;
     for (const auto &mesh: meshes) {
         vertices.insert(vertices.end(), mesh.vertices.begin(), mesh.vertices.end());
         colors.insert(colors.end(), mesh.colors.begin(), mesh.colors.end());
-        shininess.insert(shininess.end(), mesh.shininess.begin(), mesh.shininess.end());
+        shininesses.insert(shininesses.end(), mesh.shininesses.begin(), mesh.shininesses.end());
         indices.insert(indices.end(), mesh.indices.begin(), mesh.indices.end());
         normals.insert(normals.end(), mesh.normals.begin(), mesh.normals.end());
     }
@@ -1362,17 +1448,17 @@ void initializeScene() {
     // Sizes
     auto verticesSize = vertices.size() * (sizeof vertices[0]);
     auto colorsSize = colors.size() * (sizeof colors[0]);
-    auto shininessSize = shininess.size() * (sizeof shininess[0]);
+    auto shininessesSize = shininesses.size() * (sizeof shininesses[0]);
     auto normalsSize = normals.size() * (sizeof normals[0]);
     auto indicesSize = indices.size() * (sizeof indices[0]);
 
     // Buffers
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessSize + normalsSize, NULL, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessesSize + normalsSize, NULL, GL_STATIC_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, verticesSize, &vertices[0]);
     glBufferSubData(GL_ARRAY_BUFFER, verticesSize, colorsSize, &colors[0]);
-    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize, shininessSize, &shininess[0]);
-    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessSize, normalsSize, &normals[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize, shininessesSize, &shininesses[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessesSize, normalsSize, &normals[0]);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, &indices[0], GL_STATIC_DRAW);
 
@@ -1381,10 +1467,10 @@ void initializeScene() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid *) 0);
     glEnableVertexAttribArray(1); // 1 = color
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) verticesSize);
-    glEnableVertexAttribArray(2); // 2 = shininess
+    glEnableVertexAttribArray(2); // 2 = shininesses
     glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid *) (verticesSize + colorsSize));
     glEnableVertexAttribArray(3); // 3 = normals
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) (verticesSize + colorsSize + shininessSize));
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) (verticesSize + colorsSize + shininessesSize));
 
     glEnableVertexAttribArray(0);
 }
