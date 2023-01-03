@@ -1335,7 +1335,7 @@ Mesh createPlatformAndHouseMesh() {
     return Mesh(vertices, colors, shininesses, indices, normals);
 }
 
-Mesh createSphereMesh(GLuint firstIndex, float radius, vec3 color, float shininess) {
+Mesh createSphereMesh(GLuint firstIndex, vec3 center, float radius, vec3 color, float shininess) {
     const auto NUM_PARALLELS = 10;
     const auto NUM_MERIDIANS = 20;
 
@@ -1351,25 +1351,21 @@ Mesh createSphereMesh(GLuint firstIndex, float radius, vec3 color, float shinine
     vector<vec3> colors((NUM_PARALLELS + 1) * NUM_MERIDIANS);
     vector<GLfloat> shininesses((NUM_PARALLELS + 1) * NUM_MERIDIANS);
     vector<vec3> normals((NUM_PARALLELS + 1) * NUM_MERIDIANS);
-    vector<GLuint> indices(2 * (NUM_PARALLELS + 1) * NUM_MERIDIANS + 6 * (NUM_PARALLELS + 1) * NUM_MERIDIANS);
+    vector<GLuint> indices(6 * (NUM_PARALLELS + 1) * NUM_MERIDIANS);
 
     for (auto meridian = 0; meridian < NUM_MERIDIANS; meridian++) {
         for (auto parallel = 0; parallel < NUM_PARALLELS + 1; parallel++) {
             const auto u = U_MIN + parallel * STEP_U;
             const auto v = V_MIN + meridian * STEP_V;
-            const auto x = radius * cosf(u) * cosf(v);
-            const auto y = radius * cosf(u) * sinf(v);
-            const auto z = radius * sinf(u) + 0.05 * radius * rand() / RAND_MAX;
+            const auto x = center.x + radius * cosf(u) * cosf(v);
+            const auto y = center.y + radius * cosf(u) * sinf(v);
+            const auto z = center.z + radius * sinf(u);
 
             const auto vertexIndex = meridian * (NUM_PARALLELS + 1) + parallel;
             vertices[vertexIndex] = vec3(x, y, z);
             colors[vertexIndex] = color;
             shininesses[vertexIndex] = shininess;
-            normals[vertexIndex] = vec3(x, y, z);
-            indices[vertexIndex] = firstIndex + vertexIndex;
-
-            const auto shiftA = parallel * (NUM_MERIDIANS) + meridian;
-            indices[shiftA + (NUM_PARALLELS + 1) * NUM_MERIDIANS] = firstIndex + vertexIndex;
+            normals[vertexIndex] = vec3(x - center.x, y - center.y, z - center.z);
 
             if ((parallel + 1) % (NUM_PARALLELS + 1) != 0) {
                 const auto indexA = vertexIndex;
@@ -1381,14 +1377,14 @@ Mesh createSphereMesh(GLuint firstIndex, float radius, vec3 color, float shinine
                     indexC = indexC % (NUM_PARALLELS + 1);
                 }
 
-                const auto SHIFT_B = 2 * (NUM_PARALLELS + 1) * NUM_MERIDIANS;
+                const auto SHIFT_B = 0;
                 indices[SHIFT_B + 6 * vertexIndex] = firstIndex + indexA;
                 indices[SHIFT_B + 6 * vertexIndex + 1] = firstIndex + indexB;
                 indices[SHIFT_B + 6 * vertexIndex + 2] = firstIndex + indexC;
 
                 indices[SHIFT_B + 6 * vertexIndex + 3] = firstIndex + indexA;
                 indices[SHIFT_B + 6 * vertexIndex + 4] = firstIndex + indexC;
-                indices[SHIFT_B + 6 * vertexIndex + 5] = firstIndex +  indexD;
+                indices[SHIFT_B + 6 * vertexIndex + 5] = firstIndex + indexD;
             }
         }
     }
@@ -1401,13 +1397,21 @@ Mesh createCylinder(GLuint firstIndex) {
 }
 
 Mesh createTreeMesh(GLuint firstIndex) {
+    vec3 position(-400.0f, 0.0f, -600.0f);
+    const auto TREE_LEAVES_RADIUS = 225.0f;
+    const auto TREE_LEAVES_SHININESS = 4.0f;
+    const auto TREE_TRUNK_HEIGHT = 375.0f;
+    const auto TREE_TRUNK_RADIUS = 50.0f;
+
+    vec3 treeLeavesCenter(position.x, position.y + TREE_TRUNK_HEIGHT + TREE_LEAVES_RADIUS / 2, position.z);
+
     vector<vec3> vertices;
     vector<vec3> colors;
     vector<GLfloat> shininesses;
     vector<vec3> normals;
     vector<GLuint> indices;
 
-    const auto sphereMesh = createSphereMesh(firstIndex, 300.0f, Constants::COLOR_TREE_LEAVES, 4.0f);
+    const auto sphereMesh = createSphereMesh(firstIndex, treeLeavesCenter, TREE_LEAVES_RADIUS, Constants::COLOR_TREE_LEAVES, TREE_LEAVES_SHININESS);
     vertices.insert(vertices.end(), sphereMesh.vertices.begin(), sphereMesh.vertices.end());
     colors.insert(colors.end(), sphereMesh.colors.begin(), sphereMesh.colors.end());
     shininesses.insert(shininesses.end(), sphereMesh.shininesses.begin(), sphereMesh.shininesses.end());
