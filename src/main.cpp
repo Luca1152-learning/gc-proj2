@@ -1394,14 +1394,13 @@ Mesh createSphereMesh(GLuint firstIndex, vec3 center, float radius, vec3 color, 
                     indexC = indexC % (NUM_PARALLELS + 1);
                 }
 
-                const auto SHIFT_B = 0;
-                indices[SHIFT_B + 6 * vertexIndex] = firstIndex + indexA;
-                indices[SHIFT_B + 6 * vertexIndex + 1] = firstIndex + indexB;
-                indices[SHIFT_B + 6 * vertexIndex + 2] = firstIndex + indexC;
+                indices[6 * vertexIndex] = firstIndex + indexA;
+                indices[6 * vertexIndex + 1] = firstIndex + indexB;
+                indices[6 * vertexIndex + 2] = firstIndex + indexC;
 
-                indices[SHIFT_B + 6 * vertexIndex + 3] = firstIndex + indexA;
-                indices[SHIFT_B + 6 * vertexIndex + 4] = firstIndex + indexC;
-                indices[SHIFT_B + 6 * vertexIndex + 5] = firstIndex + indexD;
+                indices[6 * vertexIndex + 3] = firstIndex + indexA;
+                indices[6 * vertexIndex + 4] = firstIndex + indexC;
+                indices[6 * vertexIndex + 5] = firstIndex + indexD;
             }
         }
     }
@@ -1409,22 +1408,127 @@ Mesh createSphereMesh(GLuint firstIndex, vec3 center, float radius, vec3 color, 
     return Mesh(vertices, colors, shininesses, indices, normals);
 }
 
-Mesh createCylinder(GLuint firstIndex) {
+Mesh createCylinderMesh(GLuint firstIndex, vec3 center, float radius, float height, vec3 color, float shininess) {
+    const auto NUM_PARALLELS = 7;
+    const auto NUM_MERIDIANS = 25;
 
+    const auto U_MIN = -M_PI / 2;
+    const auto U_MAX = M_PI / 2;
+    const auto STEP_U = (U_MAX - U_MIN) / NUM_PARALLELS;
+
+    const auto V_MIN = 0;
+    const auto V_MAX = 2 * M_PI;
+    const auto STEP_V = (V_MAX - V_MIN) / NUM_MERIDIANS;
+
+    vector<vec3> vertices((NUM_PARALLELS + 1) * NUM_MERIDIANS + 2);
+    vector<vec3> colors((NUM_PARALLELS + 1) * NUM_MERIDIANS + 2);
+    vector<GLfloat> shininesses((NUM_PARALLELS + 1) * NUM_MERIDIANS + 2);
+    vector<vec3> normals((NUM_PARALLELS + 1) * NUM_MERIDIANS + 2);
+    vector<GLuint> indices(6 * (NUM_PARALLELS + 1) * NUM_MERIDIANS + 2 * 3 * NUM_MERIDIANS);
+
+    for (auto meridian = 0; meridian < NUM_MERIDIANS; meridian++) {
+        for (auto parallel = 0; parallel < NUM_PARALLELS + 1; parallel++) {
+            const auto u = U_MIN + parallel * STEP_U;
+            const auto v = V_MIN + meridian * STEP_V;
+            const auto x = center.x + radius * cosf(v);
+            const auto y = center.y + height * u / (U_MAX - U_MIN);
+            const auto z = center.z + radius * sinf(v);
+
+            const auto vertexIndex = meridian * (NUM_PARALLELS + 1) + parallel;
+            vertices[vertexIndex] = vec3(x, y, z);
+            colors[vertexIndex] = color;
+            shininesses[vertexIndex] = shininess;
+            normals[vertexIndex] = vec3(x - center.x, y - center.y, z - center.z);
+
+            if ((parallel + 1) % (NUM_PARALLELS + 1) != 0) {
+                const auto indexA = vertexIndex;
+                auto indexB = vertexIndex + (NUM_PARALLELS + 1);
+                auto indexC = indexB + 1;
+                const auto indexD = vertexIndex + 1;
+
+                if (meridian == NUM_MERIDIANS - 1) {
+                    indexB = indexB % (NUM_PARALLELS + 1);
+                    indexC = indexC % (NUM_PARALLELS + 1);
+                }
+
+                indices[6 * vertexIndex] = firstIndex + indexA;
+                indices[6 * vertexIndex + 1] = firstIndex + indexB;
+                indices[6 * vertexIndex + 2] = firstIndex + indexC;
+
+                indices[6 * vertexIndex + 3] = firstIndex + indexA;
+                indices[6 * vertexIndex + 4] = firstIndex + indexC;
+                indices[6 * vertexIndex + 5] = firstIndex + indexD;
+            }
+        }
+    };
+
+//    // Top - center index
+//    const auto centerTopIndex = (NUM_PARALLELS + 1) * NUM_MERIDIANS;
+//    const auto usedMaxU = U_MIN + NUM_PARALLELS * STEP_U;
+//    vertices[centerTopIndex] = glm::vec4(0.0f, 0.0f, usedMaxU * 40, 1.0);
+//    normals[centerTopIndex] = glm::vec3(0.0f, 0.0f, usedMaxU * 40);
+//    colors[centerTopIndex] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+//
+//    // Top - indices
+//    for (int i = 0; i < NUM_MERIDIANS; i++) {
+//        const auto firstIndexTop = 6 * (NUM_PARALLELS + 1) * NUM_MERIDIANS;
+//
+//        indices[firstIndexTop + 3 * i] = firstIndex + centerTopIndex;
+//
+//        const auto currentMeridianIndex = i * (NUM_PARALLELS + 1) + NUM_PARALLELS;
+//        indices[firstIndexTop + 3 * i + 1] = firstIndex + currentMeridianIndex;
+//
+//        const auto nextMeridianIndex = (i + 1) % NUM_MERIDIANS * (NUM_PARALLELS + 1) + NUM_PARALLELS;
+//        indices[firstIndexTop + 3 * i + 2] = firstIndex + nextMeridianIndex;
+//    };
+//
+//    // Bottom - center vertex
+//    const auto centerBottomIndex = centerTopIndex + 1;
+//    const auto usedMinU = U_MIN + 0 * STEP_U;
+//    vertices[centerBottomIndex] = vec4(0.0f, 0.0f, usedMinU * 40, 1.0);
+//    normals[centerBottomIndex] = vec3(0.0f, 0.0f, usedMinU * 40);
+//    colors[centerBottomIndex] = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+//
+//    // Bottom - indices
+//    for (int i = 0; i < NUM_MERIDIANS; i++) {
+//        const auto firstIndexBottom = 6 * (NUM_PARALLELS + 1) * NUM_MERIDIANS + 3 * NUM_MERIDIANS;
+//
+//        indices[firstIndexBottom + 3 * i] = firstIndex + centerBottomIndex;
+//
+//        const auto currentMeridianIndex = i * (NUM_PARALLELS + 1) + 0;
+//        indices[firstIndexBottom + 3 * i + 1] = firstIndex + currentMeridianIndex;
+//
+//        const auto nextMeridianIndex = (i + 1) % NUM_MERIDIANS * (NUM_PARALLELS + 1) + 0;
+//        indices[firstIndexBottom + 3 * i + 2] = firstIndex + nextMeridianIndex;
+//    }
+
+    return Mesh(vertices, colors, shininesses, indices, normals);
 }
 
 Mesh createTreeMesh(GLuint firstIndex, vec3 position) {
     const auto TREE_LEAVES_RADIUS = 225.0f;
     const auto TREE_LEAVES_SHININESS = 4.0f;
     const auto TREE_TRUNK_HEIGHT = 375.0f;
-    const auto TREE_TRUNK_RADIUS = 50.0f;
+    const auto TREE_TRUNK_RADIUS = 100.0f;
+    const auto TREE_TRUNK_SHININESS = 2.0f;
 
-    vec3 treeLeavesCenter(position.x, position.y + TREE_TRUNK_HEIGHT + TREE_LEAVES_RADIUS / 2, position.z);
-    const auto sphereMesh = createSphereMesh(firstIndex, treeLeavesCenter, TREE_LEAVES_RADIUS, Constants::COLOR_TREE_LEAVES, TREE_LEAVES_SHININESS);
+    const vec3 treeLeavesCenter(position.x, position.y + TREE_TRUNK_HEIGHT + TREE_LEAVES_RADIUS / 2, position.z);
+    const auto treeLeavesMesh = createSphereMesh(
+            firstIndex,
+            treeLeavesCenter, TREE_LEAVES_RADIUS,
+            Constants::COLOR_TREE_LEAVES, TREE_LEAVES_SHININESS
+    );
+
+    const vec3 treeTrunkCenter(position.x, position.y + TREE_TRUNK_HEIGHT / 2, position.z);
+    const auto treeTrunkMesh = createCylinderMesh(
+            firstIndex + treeLeavesMesh.vertices.size(),
+            position, TREE_TRUNK_RADIUS, TREE_TRUNK_HEIGHT,
+            Constants::COLOR_TREE_TRUNK, TREE_TRUNK_SHININESS);
 
     return combineMeshes(
             {
-                    sphereMesh
+                    treeLeavesMesh,
+                    treeTrunkMesh
             }
     );
 }
