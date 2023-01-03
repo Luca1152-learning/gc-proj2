@@ -1413,8 +1413,7 @@ Mesh createCylinder(GLuint firstIndex) {
 
 }
 
-Mesh createTreeMesh(GLuint firstIndex) {
-    vec3 position(-400.0f, 0.0f, -600.0f);
+Mesh createTreeMesh(GLuint firstIndex, vec3 position) {
     const auto TREE_LEAVES_RADIUS = 225.0f;
     const auto TREE_LEAVES_SHININESS = 4.0f;
     const auto TREE_TRUNK_HEIGHT = 375.0f;
@@ -1432,7 +1431,10 @@ Mesh createTreeMesh(GLuint firstIndex) {
 
 void initializeScene() {
     const auto platformAndHouseMesh = createPlatformAndHouseMesh();
-    const auto treeMesh = createTreeMesh(platformAndHouseMesh.vertices.size());
+    const auto treeMesh = createTreeMesh(
+            platformAndHouseMesh.vertices.size(),
+            vec3(-400.0f, 0.0f, -600.0f)
+    );
     vector<Mesh> meshes = {
             platformAndHouseMesh,
             treeMesh
