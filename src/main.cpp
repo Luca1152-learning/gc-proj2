@@ -1462,54 +1462,14 @@ Mesh createCylinderMesh(GLuint firstIndex, vec3 center, float radius, float heig
         }
     };
 
-//    // Top - center index
-//    const auto centerTopIndex = (NUM_PARALLELS + 1) * NUM_MERIDIANS;
-//    const auto usedMaxU = U_MIN + NUM_PARALLELS * STEP_U;
-//    vertices[centerTopIndex] = glm::vec4(0.0f, 0.0f, usedMaxU * 40, 1.0);
-//    normals[centerTopIndex] = glm::vec3(0.0f, 0.0f, usedMaxU * 40);
-//    colors[centerTopIndex] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-//
-//    // Top - indices
-//    for (int i = 0; i < NUM_MERIDIANS; i++) {
-//        const auto firstIndexTop = 6 * (NUM_PARALLELS + 1) * NUM_MERIDIANS;
-//
-//        indices[firstIndexTop + 3 * i] = firstIndex + centerTopIndex;
-//
-//        const auto currentMeridianIndex = i * (NUM_PARALLELS + 1) + NUM_PARALLELS;
-//        indices[firstIndexTop + 3 * i + 1] = firstIndex + currentMeridianIndex;
-//
-//        const auto nextMeridianIndex = (i + 1) % NUM_MERIDIANS * (NUM_PARALLELS + 1) + NUM_PARALLELS;
-//        indices[firstIndexTop + 3 * i + 2] = firstIndex + nextMeridianIndex;
-//    };
-//
-//    // Bottom - center vertex
-//    const auto centerBottomIndex = centerTopIndex + 1;
-//    const auto usedMinU = U_MIN + 0 * STEP_U;
-//    vertices[centerBottomIndex] = vec4(0.0f, 0.0f, usedMinU * 40, 1.0);
-//    normals[centerBottomIndex] = vec3(0.0f, 0.0f, usedMinU * 40);
-//    colors[centerBottomIndex] = vec4(1.0f, 1.0f, 1.0f, 1.0f);
-//
-//    // Bottom - indices
-//    for (int i = 0; i < NUM_MERIDIANS; i++) {
-//        const auto firstIndexBottom = 6 * (NUM_PARALLELS + 1) * NUM_MERIDIANS + 3 * NUM_MERIDIANS;
-//
-//        indices[firstIndexBottom + 3 * i] = firstIndex + centerBottomIndex;
-//
-//        const auto currentMeridianIndex = i * (NUM_PARALLELS + 1) + 0;
-//        indices[firstIndexBottom + 3 * i + 1] = firstIndex + currentMeridianIndex;
-//
-//        const auto nextMeridianIndex = (i + 1) % NUM_MERIDIANS * (NUM_PARALLELS + 1) + 0;
-//        indices[firstIndexBottom + 3 * i + 2] = firstIndex + nextMeridianIndex;
-//    }
-
     return Mesh(vertices, colors, shininesses, indices, normals);
 }
 
 Mesh createTreeMesh(GLuint firstIndex, vec3 position) {
     const auto TREE_LEAVES_RADIUS = 225.0f;
     const auto TREE_LEAVES_SHININESS = 4.0f;
-    const auto TREE_TRUNK_HEIGHT = 375.0f;
-    const auto TREE_TRUNK_RADIUS = 100.0f;
+    const auto TREE_TRUNK_HEIGHT = 325.0f;
+    const auto TREE_TRUNK_RADIUS = 35.0f;
     const auto TREE_TRUNK_SHININESS = 2.0f;
 
     const vec3 treeLeavesCenter(position.x, position.y + TREE_TRUNK_HEIGHT + TREE_LEAVES_RADIUS / 2, position.z);
@@ -1519,10 +1479,10 @@ Mesh createTreeMesh(GLuint firstIndex, vec3 position) {
             Constants::COLOR_TREE_LEAVES, TREE_LEAVES_SHININESS
     );
 
-    const vec3 treeTrunkCenter(position.x, position.y + TREE_TRUNK_HEIGHT / 2, position.z);
+    const vec3 treeTrunkCenter(position.x, position.y + TREE_TRUNK_HEIGHT / 2.0f, position.z);
     const auto treeTrunkMesh = createCylinderMesh(
             firstIndex + treeLeavesMesh.vertices.size(),
-            position, TREE_TRUNK_RADIUS, TREE_TRUNK_HEIGHT,
+            treeTrunkCenter, TREE_TRUNK_RADIUS, TREE_TRUNK_HEIGHT,
             Constants::COLOR_TREE_TRUNK, TREE_TRUNK_SHININESS);
 
     return combineMeshes(
@@ -1537,7 +1497,7 @@ void initializeScene() {
     const auto platformAndHouseMesh = createPlatformAndHouseMesh();
     const auto treeMesh = createTreeMesh(
             platformAndHouseMesh.vertices.size(),
-            vec3(-400.0f, 0.0f, -600.0f)
+            vec3(-450.0f, 0.0f, -600.0f)
     );
     vector<Mesh> meshes = {
             platformAndHouseMesh,
@@ -1605,7 +1565,7 @@ void render() {
     glUniform3f(skyColorLocation, Constants::COLOR_SKY.r, Constants::COLOR_SKY.g, Constants::COLOR_SKY.b);
 
     glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, 2000, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 5000, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
