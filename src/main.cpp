@@ -156,6 +156,23 @@ void initializeShaders() {
     skyColorLocation = glGetUniformLocation(shaderProgram, "skyColor");
 }
 
+Mesh combineMeshes(vector<Mesh> meshes) {
+    vector<vec3> vertices;
+    vector<vec3> colors;
+    vector<GLfloat> shininesses;
+    vector<GLuint> indices;
+    vector<vec3> normals;
+    for (const auto &mesh: meshes) {
+        vertices.insert(vertices.end(), mesh.vertices.begin(), mesh.vertices.end());
+        colors.insert(colors.end(), mesh.colors.begin(), mesh.colors.end());
+        shininesses.insert(shininesses.end(), mesh.shininesses.begin(), mesh.shininesses.end());
+        indices.insert(indices.end(), mesh.indices.begin(), mesh.indices.end());
+        normals.insert(normals.end(), mesh.normals.begin(), mesh.normals.end());
+    }
+
+    return Mesh(vertices, colors, shininesses, indices, normals);
+}
+
 Mesh createPlatformAndHouseMesh() {
     const vector<vec3> vertices = {
             // Grass top
@@ -1404,21 +1421,13 @@ Mesh createTreeMesh(GLuint firstIndex) {
     const auto TREE_TRUNK_RADIUS = 50.0f;
 
     vec3 treeLeavesCenter(position.x, position.y + TREE_TRUNK_HEIGHT + TREE_LEAVES_RADIUS / 2, position.z);
-
-    vector<vec3> vertices;
-    vector<vec3> colors;
-    vector<GLfloat> shininesses;
-    vector<vec3> normals;
-    vector<GLuint> indices;
-
     const auto sphereMesh = createSphereMesh(firstIndex, treeLeavesCenter, TREE_LEAVES_RADIUS, Constants::COLOR_TREE_LEAVES, TREE_LEAVES_SHININESS);
-    vertices.insert(vertices.end(), sphereMesh.vertices.begin(), sphereMesh.vertices.end());
-    colors.insert(colors.end(), sphereMesh.colors.begin(), sphereMesh.colors.end());
-    shininesses.insert(shininesses.end(), sphereMesh.shininesses.begin(), sphereMesh.shininesses.end());
-    normals.insert(normals.end(), sphereMesh.normals.begin(), sphereMesh.normals.end());
-    indices.insert(indices.end(), sphereMesh.indices.begin(), sphereMesh.indices.end());
 
-    return Mesh(vertices, colors, shininesses, indices, normals);
+    return combineMeshes(
+            {
+                    sphereMesh
+            }
+    );
 }
 
 void initializeScene() {
@@ -1429,18 +1438,7 @@ void initializeScene() {
             treeMesh
     };
 
-    vector<vec3> vertices;
-    vector<vec3> colors;
-    vector<GLfloat> shininesses;
-    vector<GLuint> indices;
-    vector<vec3> normals;
-    for (const auto &mesh: meshes) {
-        vertices.insert(vertices.end(), mesh.vertices.begin(), mesh.vertices.end());
-        colors.insert(colors.end(), mesh.colors.begin(), mesh.colors.end());
-        shininesses.insert(shininesses.end(), mesh.shininesses.begin(), mesh.shininesses.end());
-        indices.insert(indices.end(), mesh.indices.begin(), mesh.indices.end());
-        normals.insert(normals.end(), mesh.normals.begin(), mesh.normals.end());
-    }
+    const auto worldMesh = combineMeshes(meshes);
 
     // Initialize buffers
     glGenVertexArrays(1, &vao);
@@ -1450,21 +1448,21 @@ void initializeScene() {
     glBindVertexArray(vao);
 
     // Sizes
-    auto verticesSize = vertices.size() * (sizeof vertices[0]);
-    auto colorsSize = colors.size() * (sizeof colors[0]);
-    auto shininessesSize = shininesses.size() * (sizeof shininesses[0]);
-    auto normalsSize = normals.size() * (sizeof normals[0]);
-    auto indicesSize = indices.size() * (sizeof indices[0]);
+    auto verticesSize = worldMesh.vertices.size() * (sizeof worldMesh.vertices[0]);
+    auto colorsSize = worldMesh.colors.size() * (sizeof worldMesh.colors[0]);
+    auto shininessesSize = worldMesh.shininesses.size() * (sizeof worldMesh.shininesses[0]);
+    auto normalsSize = worldMesh.normals.size() * (sizeof worldMesh.normals[0]);
+    auto indicesSize = worldMesh.indices.size() * (sizeof worldMesh.indices[0]);
 
     // Buffers
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessesSize + normalsSize, NULL, GL_STATIC_DRAW);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, verticesSize, &vertices[0]);
-    glBufferSubData(GL_ARRAY_BUFFER, verticesSize, colorsSize, &colors[0]);
-    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize, shininessesSize, &shininesses[0]);
-    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessesSize, normalsSize, &normals[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, verticesSize, &worldMesh.vertices[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, verticesSize, colorsSize, &worldMesh.colors[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize, shininessesSize, &worldMesh.shininesses[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessesSize, normalsSize, &worldMesh.normals[0]);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, &indices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, &worldMesh.indices[0], GL_STATIC_DRAW);
 
     // Attributes
     glEnableVertexAttribArray(0); // 0 = position
