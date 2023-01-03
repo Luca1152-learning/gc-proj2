@@ -4,9 +4,18 @@
 #include "utils/render/ShadersUtils.h"
 #include "utils/Constants.h"
 #include <vector>
+#include <tuple>
 
 using namespace glm;
 using namespace std;
+
+struct Mesh {
+    vector<vec3> vertices;
+    vector<vec3> colors;
+    vector<GLfloat> shininess;
+    vector<GLuint> indices;
+    vector<vec3> normals;
+};
 
 GLuint shaderProgram;
 GLuint vao, vbo, ebo;
@@ -139,7 +148,7 @@ void initializeShaders() {
     skyColorLocation = glGetUniformLocation(shaderProgram, "skyColor");
 }
 
-void initializeScene() {
+Mesh createPlatformAndHouseMesh() {
     const vector<vec3> vertices = {
             // Grass top
             /* 0 (Grass top - 43) */vec3(-1029.73f, 0.0f, -920.41f),
@@ -1315,6 +1324,34 @@ void initializeScene() {
         normals[indices[i + 2]] = ABxAC;
     }
 
+    Mesh mesh;
+    mesh.vertices = vertices;
+    mesh.colors = colors;
+    mesh.shininess = shininess;
+    mesh.indices = indices;
+    mesh.normals = normals;
+
+    return mesh;
+}
+
+void initializeScene() {
+    vector<Mesh> meshes = {
+            createPlatformAndHouseMesh()
+    };
+
+    vector<vec3> vertices;
+    vector<vec3> colors;
+    vector<GLfloat> shininess;
+    vector<GLuint> indices;
+    vector<vec3> normals;
+    for (const auto &mesh: meshes) {
+        vertices.insert(vertices.end(), mesh.vertices.begin(), mesh.vertices.end());
+        colors.insert(colors.end(), mesh.colors.begin(), mesh.colors.end());
+        shininess.insert(shininess.end(), mesh.shininess.begin(), mesh.shininess.end());
+        indices.insert(indices.end(), mesh.indices.begin(), mesh.indices.end());
+        normals.insert(normals.end(), mesh.normals.begin(), mesh.normals.end());
+    }
+
     // Initialize buffers
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
@@ -1345,9 +1382,9 @@ void initializeScene() {
     glEnableVertexAttribArray(1); // 1 = color
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) verticesSize);
     glEnableVertexAttribArray(2); // 2 = shininess
-    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid * )(verticesSize + colorsSize));
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid *) (verticesSize + colorsSize));
     glEnableVertexAttribArray(3); // 3 = normals
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid * )(verticesSize + colorsSize + shininessSize));
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) (verticesSize + colorsSize + shininessSize));
 
     glEnableVertexAttribArray(0);
 }
