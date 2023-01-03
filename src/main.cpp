@@ -444,6 +444,38 @@ void initializeScene() {
             /* 263 (Roof - bottom - 155) */vec3(-265.01f, 425.47f, 678.86f),
             /* 264 (Roof - bottom - 162) */vec3(-291.43f, 425.47f, 678.86f),
             /* 265 (Roof - bottom - 164) */vec3(-291.43f, 425.47f, -115.21f),
+            // Chimney - outer - front & back
+            /* 266 (Chimney - outer - front & back - 22) */vec3(308.14f, 467.57f, 174.61f),
+            /* 267 (Chimney - outer - front & back - 31) */vec3(308.14f, 467.57f, 424.14f),
+            /* 268 (Chimney - outer - front & back - 37) */vec3(462.36f, 467.57f, 424.14f),
+            /* 269 (Chimney - outer - front & back - 39) */vec3(462.36f, 467.57f, 174.61f),
+            /* 270 (Chimney - outer - front & back - 48) */vec3(462.36f, 875.79f, 174.61f),
+            /* 271 (Chimney - outer - front & back - 50) */vec3(462.36f, 875.79f, 424.14f),
+            /* 272 (Chimney - outer - front & back - 53) */vec3(308.14f, 875.79f, 424.14f),
+            /* 273 (Chimney - outer - front & back - 55) */vec3(308.14f, 875.79f, 174.61f),
+            // Chimney - outer - left & right
+            /* 274 (Chimney - outer - left & right - 22) */vec3(308.14f, 467.57f, 174.61f),
+            /* 275 (Chimney - outer - left & right - 31) */vec3(308.14f, 467.57f, 424.14f),
+            /* 276 (Chimney - outer - left & right - 37) */vec3(462.36f, 467.57f, 424.14f),
+            /* 277 (Chimney - outer - left & right - 39) */vec3(462.36f, 467.57f, 174.61f),
+            /* 278 (Chimney - outer - left & right - 48) */vec3(462.36f, 875.79f, 174.61f),
+            /* 279 (Chimney - outer - left & right - 50) */vec3(462.36f, 875.79f, 424.14f),
+            /* 280 (Chimney - outer - left & right - 53) */vec3(308.14f, 875.79f, 424.14f),
+            /* 281 (Chimney - outer - left & right - 55) */vec3(308.14f, 875.79f, 174.61f),
+            // Chimney - outer - top
+            /* 282 (Chimney - outer - top - 48) */vec3(462.36f, 875.79f, 174.61f),
+            /* 283 (Chimney - outer - top - 49) */vec3(434.47f, 875.79f, 396.25f),
+            /* 284 (Chimney - outer - top - 50) */vec3(462.36f, 875.79f, 424.14f),
+            /* 285 (Chimney - outer - top - 51) */vec3(336.04f, 875.79f, 396.25f),
+            /* 286 (Chimney - outer - top - 52) */vec3(336.04f, 875.79f, 202.51f),
+            /* 287 (Chimney - outer - top - 53) */vec3(308.14f, 875.79f, 424.14f),
+            /* 288 (Chimney - outer - top - 54) */vec3(434.47f, 875.79f, 202.51f),
+            /* 289 (Chimney - outer - top - 55) */vec3(308.14f, 875.79f, 174.61f),
+            // Chimney - inner - top
+            /* 290 (Chimney - inner - top - 4) */vec3(434.47f, 853.6f, 396.25f),
+            /* 291 (Chimney - inner - top - 5) */vec3(434.47f, 853.6f, 202.51f),
+            /* 292 (Chimney - inner - top - 6) */vec3(336.04f, 853.6f, 396.25f),
+            /* 293 (Chimney - inner - top - 7) */vec3(336.04f, 853.6f, 202.51f),
     };
     const glm::vec3 colors[] = {
             // Grass
@@ -713,6 +745,34 @@ void initializeScene() {
             vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
             vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
             vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_CHIMNEY.r, Constants::COLOR_CHIMNEY.g, Constants::COLOR_CHIMNEY.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
+            vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
     };
     const GLfloat shininess[] = {
             // Grass
@@ -982,6 +1042,34 @@ void initializeScene() {
             Constants::SHININESS_ROOF,
             Constants::SHININESS_ROOF,
             Constants::SHININESS_ROOF,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
+            Constants::SHININESS_CHIMNEY,
     };
     GLuint indices[] = {
             // Grass top
@@ -1186,6 +1274,28 @@ void initializeScene() {
             260, 258, 261, // 59, 26, 61
             265, 262, 264, // 164, 154, 162
             262, 263, 264, // 154, 155, 162
+            // Chimney - outer - front & back
+            270, 269, 266, // 48, 39, 22
+            270, 266, 273, // 48, 22, 55
+            272, 267, 268, // 53, 31, 37
+            272, 268, 271, // 53, 37, 50
+            // Chimney - outer - left & right
+            279, 276, 278, // 50, 37, 48
+            276, 277, 278, // 37, 39, 48
+            281, 274, 275, // 55, 22, 31
+            281, 275, 280, // 55, 31, 53
+            // Chimney - outer - top
+            283, 284, 282, // 49, 50, 48
+            283, 282, 288, // 49, 48, 54
+            288, 282, 286, // 54, 48, 52
+            282, 286, 289, // 48, 52, 55
+            286, 289, 287, // 52, 55, 53
+            286, 287, 285, // 52, 53, 51
+            285, 287, 284, // 51, 53, 50
+            285, 284, 283, // 51, 50, 49
+            // Chimney - inner - top
+            292, 290, 291, // 6, 4, 5
+            292, 291, 293, // 6, 5, 7
     };
 
     // TODO - create special function for ^ and a function for the tree (which should return vertices,

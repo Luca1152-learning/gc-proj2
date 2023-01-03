@@ -23,3 +23,4 @@ const float Constants::SHININESS_DOOR = 2.0f;
 const float Constants::SHININESS_FRAMES = 8.0f;
 const float Constants::SHININESS_WINDOWS = 128.0f;
 const float Constants::SHININESS_ROOF = 32.0f;
+const float Constants::SHININESS_CHIMNEY = 2.0f;
