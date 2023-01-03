@@ -389,6 +389,61 @@ void initializeScene() {
             /* 215 (Window - outer frame - left & right - 37) */vec3(223.28f, 678.83f, -77.59f),
             /* 216 (Window - outer frame - left & right - 38) */vec3(62.39f, 678.83f, -64.89f),
             /* 217 (Window - outer frame - left & right - 39) */vec3(62.39f, 678.83f, -77.59f),
+            // Roof - left slope top
+            /* 218 (Roof - left slope top - 133) */vec3(150.46f, 875.79f, 678.86f),
+            /* 219 (Roof - left slope top - 135) */vec3(150.46f, 875.79f, -115.21f),
+            /* 220 (Roof - left slope top - 162) */vec3(-291.43f, 425.47f, 678.86f),
+            /* 221 (Roof - left slope top - 164) */vec3(-291.43f, 425.47f, -115.21f),
+            // Roof - right slope top
+            /* 222 (Roof - right slope top - 59) */vec3(547.33f, 425.47f, 678.86f),
+            /* 223 (Roof - right slope top - 61) */vec3(547.33f, 425.47f, -115.21f),
+            /* 224 (Roof - right slope top - 133) */vec3(150.46f, 875.79f, 678.86f),
+            /* 225 (Roof - right slope top - 135) */vec3(150.46f, 875.79f, -115.21f),
+            // Roof - left slope bottom
+            /* 226 (Roof - left slope bottom - 78) */vec3(149.63f, 848.02f, 636.31f),
+            /* 227 (Roof - left slope bottom - 85) */vec3(149.63f, 848.02f, 678.86f),
+            /* 228 (Roof - left slope bottom - 108) */vec3(149.63f, 848.02f, -64.89f),
+            /* 229 (Roof - left slope bottom - 110) */vec3(149.63f, 848.02f, -115.21f),
+            /* 230 (Roof - left slope bottom - 118) */vec3(-224.47f, 466.78f, 678.86f),
+            /* 231 (Roof - left slope bottom - 120) */vec3(-224.47f, 466.78f, 636.31f),
+            /* 232 (Roof - left slope bottom - 143) */vec3(-224.47f, 466.78f, -64.89f),
+            /* 233 (Roof - left slope bottom - 145) */vec3(-224.47f, 466.78f, -115.21f),
+            /* 234 (Roof - left slope bottom - 154) */vec3(-265.01f, 425.47f, -115.21f),
+            /* 235 (Roof - left slope bottom - 155) */vec3(-265.01f, 425.47f, 678.86f),
+            // Roof - right slope bottom
+            /* 236 (Roof - right slope bottom - 26) */vec3(517.49f, 425.47f, -115.21f),
+            /* 237 (Roof - right slope bottom - 35) */vec3(483.08f, 464.99f, -64.89f),
+            /* 238 (Roof - right slope bottom - 36) */vec3(483.08f, 464.99f, -115.21f),
+            /* 239 (Roof - right slope bottom - 44) */vec3(483.08f, 464.99f, 636.31f),
+            /* 240 (Roof - right slope bottom - 51) */vec3(483.08f, 464.99f, 678.86f),
+            /* 241 (Roof - right slope bottom - 53) */vec3(517.49f, 425.47f, 678.86f),
+            /* 242 (Roof - right slope bottom - 78) */vec3(149.63f, 848.02f, 636.31f),
+            /* 243 (Roof - right slope bottom - 85) */vec3(149.63f, 848.02f, 678.86f),
+            /* 244 (Roof - right slope bottom - 108) */vec3(149.63f, 848.02f, -64.89f),
+            /* 245 (Roof - right slope bottom - 110) */vec3(149.63f, 848.02f, -115.21f),
+            // Roof - front
+            /* 246 (Roof - front - 26) */vec3(517.49f, 425.47f, -115.21f),
+            /* 247 (Roof - front - 61) */vec3(547.33f, 425.47f, -115.21f),
+            /* 248 (Roof - front - 110) */vec3(149.63f, 848.02f, -115.21f),
+            /* 249 (Roof - front - 135) */vec3(150.46f, 875.79f, -115.21f),
+            /* 250 (Roof - front - 154) */vec3(-265.01f, 425.47f, -115.21f),
+            /* 251 (Roof - front - 164) */vec3(-291.43f, 425.47f, -115.21f),
+            // Roof - back
+            /* 252 (Roof - back - 53) */vec3(517.49f, 425.47f, 678.86f),
+            /* 253 (Roof - back - 59) */vec3(547.33f, 425.47f, 678.86f),
+            /* 254 (Roof - back - 85) */vec3(149.63f, 848.02f, 678.86f),
+            /* 255 (Roof - back - 133) */vec3(150.46f, 875.79f, 678.86f),
+            /* 256 (Roof - back - 155) */vec3(-265.01f, 425.47f, 678.86f),
+            /* 257 (Roof - back - 162) */vec3(-291.43f, 425.47f, 678.86f),
+            // Roof - bottom
+            /* 258 (Roof - bottom - 26) */vec3(517.49f, 425.47f, -115.21f),
+            /* 259 (Roof - bottom - 53) */vec3(517.49f, 425.47f, 678.86f),
+            /* 260 (Roof - bottom - 59) */vec3(547.33f, 425.47f, 678.86f),
+            /* 261 (Roof - bottom - 61) */vec3(547.33f, 425.47f, -115.21f),
+            /* 262 (Roof - bottom - 154) */vec3(-265.01f, 425.47f, -115.21f),
+            /* 263 (Roof - bottom - 155) */vec3(-265.01f, 425.47f, 678.86f),
+            /* 264 (Roof - bottom - 162) */vec3(-291.43f, 425.47f, 678.86f),
+            /* 265 (Roof - bottom - 164) */vec3(-291.43f, 425.47f, -115.21f),
     };
     const glm::vec3 colors[] = {
             // Grass
@@ -610,6 +665,54 @@ void initializeScene() {
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
+            vec3(Constants::COLOR_ROOF.r, Constants::COLOR_ROOF.g, Constants::COLOR_ROOF.b),
     };
     const GLfloat shininess[] = {
             // Grass
@@ -831,6 +934,54 @@ void initializeScene() {
             Constants::SHININESS_FRAMES,
             Constants::SHININESS_FRAMES,
             Constants::SHININESS_FRAMES,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
+            Constants::SHININESS_ROOF,
     };
     GLuint indices[] = {
             // Grass top
@@ -1000,6 +1151,41 @@ void initializeScene() {
             215, 212, 213, // 37, 29, 31
             211, 216, 217,  // 39, 38, 22
             216, 211, 210, // 38, 22, 20
+            // Roof - left slope top
+            219, 221, 218, // 135, 164, 133
+            218, 221, 220, // 133, 164, 162
+            // Roof - right slope top
+            224, 222, 225, // 133, 59, 135
+            222, 223, 225, // 59, 61, 135
+            // Roof - left slope bottom
+            228, 233, 229, // 108, 145, 110
+            228, 232, 233, // 108, 143, 145
+            234, 233, 235, // 154, 145, 155
+            233, 235, 230, // 145, 155, 118
+            230, 231, 226, // 118, 120, 78
+            230, 226, 227, // 118, 78, 85
+            // Roof - right slope bottom
+            237, 244, 245, // 35, 108, 110
+            237, 245, 237, // 35, 110, 35
+            240, 241, 236, // 51, 53, 26
+            240, 238, 236, // 51, 36, 26
+            243, 242, 240, // 85, 78, 51
+            242, 240, 239, // 78, 51, 44
+            // Roof - front
+            249, 248, 250, // 135, 110, 154
+            249, 250, 251,  // 135, 154, 164
+            247, 246, 249, // 61, 26, 135
+            246, 248, 249, // 26, 110, 135
+            // Roof - back
+            255, 254, 252, // 133, 85, 53
+            255, 252, 253, // 133, 53, 59
+            257, 256, 254, // 162, 155, 85
+            257, 254, 255, // 162, 85, 133
+            // Roof - bottom
+            260, 259, 258, // 59, 53, 26
+            260, 258, 261, // 59, 26, 61
+            265, 262, 264, // 164, 154, 162
+            262, 263, 264, // 154, 155, 162
     };
 
     // TODO - create special function for ^ and a function for the tree (which should return vertices,
@@ -1041,12 +1227,12 @@ void initializeScene() {
     glEnableVertexAttribArray(0); // 0 = position
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid *) 0);
     glEnableVertexAttribArray(1); // 1 = color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid * )
-    sizeof(vertices));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *)
+            sizeof(vertices));
     glEnableVertexAttribArray(2); // 2 = shininess
-    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid * )(sizeof(vertices) + sizeof(colors)));
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid *) (sizeof(vertices) + sizeof(colors)));
     glEnableVertexAttribArray(3); // 3 = normals
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid * )(sizeof(vertices) + sizeof(colors) + sizeof(shininess)));
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) (sizeof(vertices) + sizeof(colors) + sizeof(shininess)));
 
     glEnableVertexAttribArray(0);
 }
