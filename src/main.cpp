@@ -361,6 +361,16 @@ void initializeScene() {
             /* 191 (Window - inner frame - top - 13) */vec3(135.49f, 665.7f, -40.76f),
             /* 192 (Window - inner frame - top - 14) */vec3(75.52f, 665.7f, -40.76f),
             /* 193 (Window - inner frame - top - 15) */vec3(150.1f, 665.7f, -40.76f),
+            // Window - inner frame - bottom - left
+            /* 194 (Window - inner frame - bottom - left - 4) */vec3(135.49f, 559.77f, -59.17f),
+            /* 195 (Window - inner frame - bottom - left - 5) */vec3(135.49f, 559.77f, -40.76f),
+            /* 196 (Window - inner frame - bottom - left - 6) */vec3(75.52f, 559.77f, -59.17f),
+            /* 197 (Window - inner frame - bottom - left - 7) */vec3(75.52f, 559.77f, -40.76f),
+            // Window - inner frame - bottom - right
+            /* 198 (Window - inner frame - bottom - right - 4) */vec3(210.14f, 559.77f, -59.17f),
+            /* 199 (Window - inner frame - bottom - right - 5) */vec3(210.14f, 559.77f, -40.76f),
+            /* 200 (Window - inner frame - bottom - right - 6) */vec3(150.1f, 559.77f, -59.17f),
+            /* 201 (Window - inner frame - bottom - right - 7) */vec3(150.1f, 559.77f, -40.76f),
             // Window - outer frame - bottom & top
             // Window - outer frame - left & right
     };
@@ -484,6 +494,14 @@ void initializeScene() {
             vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
             vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
             vec3(Constants::COLOR_WINDOWS.r, Constants::COLOR_WINDOWS.g, Constants::COLOR_WINDOWS.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
+            vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
             vec3(Constants::COLOR_FRAMES.r, Constants::COLOR_FRAMES.g, Constants::COLOR_FRAMES.b),
@@ -757,6 +775,14 @@ void initializeScene() {
             Constants::SHININESS_FRAMES,
             Constants::SHININESS_FRAMES,
             Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
+            Constants::SHININESS_FRAMES,
     };
     GLuint indices[] = {
             // Grass top
@@ -910,6 +936,12 @@ void initializeScene() {
             188, 187, 189, // 10, 9, 11
             188, 186, 187, // 10, 8, 9
             186, 193, 187, // 8, 15, 9
+            // Window - inner frame - bottom - left
+            194, 195, 196, // 4, 5, 6
+            195, 197, 196, // 5, 7, 6
+            // Window - inner frame - bottom - right
+            198, 199, 200, // 4, 5, 6
+            199, 201, 200, // 5, 7, 6
     };
 
     // TODO - create special function for ^ and a function for the tree (which should return vertices,
@@ -951,11 +983,12 @@ void initializeScene() {
     glEnableVertexAttribArray(0); // 0 = position
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid *) 0);
     glEnableVertexAttribArray(1); // 1 = color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) sizeof(vertices));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid * )
+    sizeof(vertices));
     glEnableVertexAttribArray(2); // 2 = shininess
-    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid *) (sizeof(vertices) + sizeof(colors)));
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid * )(sizeof(vertices) + sizeof(colors)));
     glEnableVertexAttribArray(3); // 3 = normals
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) (sizeof(vertices) + sizeof(colors) + sizeof(shininess)));
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid * )(sizeof(vertices) + sizeof(colors) + sizeof(shininess)));
 
     glEnableVertexAttribArray(0);
 }
