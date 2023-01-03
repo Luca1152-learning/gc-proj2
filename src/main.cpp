@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "utils/render/ShadersUtils.h"
 #include "utils/Constants.h"
+#include <vector>
 
 using namespace glm;
 using namespace std;
@@ -139,7 +140,7 @@ void initializeShaders() {
 }
 
 void initializeScene() {
-    const vec3 vertices[] = {
+    const vector<vec3> vertices = {
             // Grass top
             /* 0 (Grass top - 43) */vec3(-1029.73f, 0.0f, -920.41f),
             /* 1 (Grass top - 32) */vec3(-96.5f, 0.0f, -920.41f),
@@ -477,7 +478,7 @@ void initializeScene() {
             /* 292 (Chimney - inner - top - 6) */vec3(336.04f, 853.6f, 396.25f),
             /* 293 (Chimney - inner - top - 7) */vec3(336.04f, 853.6f, 202.51f),
     };
-    const glm::vec3 colors[] = {
+    const vector<vec3> colors = {
             // Grass
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
             vec3(Constants::COLOR_GRASS.r, Constants::COLOR_GRASS.g, Constants::COLOR_GRASS.b),
@@ -774,7 +775,7 @@ void initializeScene() {
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
             vec3(Constants::COLOR_ROAD.r, Constants::COLOR_ROAD.g, Constants::COLOR_ROAD.b),
     };
-    const GLfloat shininess[] = {
+    const vector<GLfloat> shininess = {
             // Grass
             Constants::SHININESS_GRASS,
             Constants::SHININESS_GRASS,
@@ -1071,7 +1072,7 @@ void initializeScene() {
             Constants::SHININESS_CHIMNEY,
             Constants::SHININESS_CHIMNEY,
     };
-    GLuint indices[] = {
+    const vector<GLuint> indices = {
             // Grass top
             1, 0, 2, // 32, 43, 65
             1, 2, 3, // 32, 65, 30
@@ -1298,51 +1299,55 @@ void initializeScene() {
             292, 291, 293, // 6, 5, 7
     };
 
-    // TODO - create special function for ^ and a function for the tree (which should return vertices,
-    // TODO - colors and shininess)
-
     // Set the normals
-    const int numNormals = sizeof(vertices) / sizeof(vec3);
-    vec3 normals[numNormals];
-    const int numIndices = sizeof(indices) / sizeof(GLuint);
-    for (int i = 0; i < numIndices; i += 3) {
-        glm::vec3 A = vertices[indices[i]];
-        glm::vec3 B = vertices[indices[i + 1]];
-        glm::vec3 C = vertices[indices[i + 2]];
+    vector<vec3> normals(vertices.size());
+    for (int i = 0; i < indices.size(); i += 3) {
+        auto A = vertices[indices[i]];
+        auto B = vertices[indices[i + 1]];
+        auto C = vertices[indices[i + 2]];
 
-        glm::vec3 AB = B - A;
-        glm::vec3 AC = C - A;
-        glm::vec3 ABxAC = normalize(glm::cross(AB, AC));
+        auto AB = B - A;
+        auto AC = C - A;
+        auto ABxAC = normalize(glm::cross(AB, AC));
 
         normals[indices[i]] = ABxAC;
         normals[indices[i + 1]] = ABxAC;
         normals[indices[i + 2]] = ABxAC;
     }
 
+    // Initialize buffers
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
     glGenBuffers(1, &ebo);
 
     glBindVertexArray(vao);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors) + sizeof(shininess) + sizeof(normals), NULL, GL_STATIC_DRAW);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-    glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(colors), colors);
-    glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors), sizeof(shininess), shininess);
-    glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(colors) + sizeof(shininess), sizeof(normals), normals);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    // Sizes
+    auto verticesSize = vertices.size() * (sizeof vertices[0]);
+    auto colorsSize = colors.size() * (sizeof colors[0]);
+    auto shininessSize = shininess.size() * (sizeof shininess[0]);
+    auto normalsSize = normals.size() * (sizeof normals[0]);
+    auto indicesSize = indices.size() * (sizeof indices[0]);
 
+    // Buffers
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessSize + normalsSize, NULL, GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, verticesSize, &vertices[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, verticesSize, colorsSize, &colors[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize, shininessSize, &shininess[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, verticesSize + colorsSize + shininessSize, normalsSize, &normals[0]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, &indices[0], GL_STATIC_DRAW);
+
+    // Attributes
     glEnableVertexAttribArray(0); // 0 = position
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid *) 0);
     glEnableVertexAttribArray(1); // 1 = color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *)
-            sizeof(vertices));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) verticesSize);
     glEnableVertexAttribArray(2); // 2 = shininess
-    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid *) (sizeof(vertices) + sizeof(colors)));
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat), (GLvoid * )(verticesSize + colorsSize));
     glEnableVertexAttribArray(3); // 3 = normals
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) (sizeof(vertices) + sizeof(colors) + sizeof(shininess)));
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid * )(verticesSize + colorsSize + shininessSize));
 
     glEnableVertexAttribArray(0);
 }
