@@ -15,13 +15,14 @@ struct Mesh {
     vector<GLfloat> shininesses;
     vector<GLuint> indices;
     vector<vec3> normals;
+    GLuint firstIndex;
 
-    Mesh(vector<vec3> vertices, vector<vec3> colors, vector<GLfloat> shininesses, vector<GLuint> indices, vector<vec3> normals) {
-        this->vertices = vertices;
-        this->colors = colors;
-        this->shininesses = shininesses;
-        this->indices = indices;
-        this->normals = normals;
+    Mesh(GLuint firstIndex,
+         vector<vec3> vertices,
+         vector<vec3> colors, vector<GLfloat> shininesses,
+         vector<GLuint> indices, vector<vec3> normals
+    ) : firstIndex(firstIndex), vertices(vertices), colors(colors),
+        shininesses(shininesses), indices(indices), normals(normals) {
     }
 };
 
@@ -170,7 +171,7 @@ Mesh combineMeshes(vector<Mesh> meshes) {
         normals.insert(normals.end(), mesh.normals.begin(), mesh.normals.end());
     }
 
-    return Mesh(vertices, colors, shininesses, indices, normals);
+    return Mesh(meshes[0].firstIndex, vertices, colors, shininesses, indices, normals);
 }
 
 Mesh createPlatformAndHouseMesh() {
@@ -1349,7 +1350,7 @@ Mesh createPlatformAndHouseMesh() {
         normals[indices[i + 2]] = ABxAC;
     }
 
-    return Mesh(vertices, colors, shininesses, indices, normals);
+    return Mesh(0, vertices, colors, shininesses, indices, normals);
 }
 
 Mesh createSphereMesh(GLuint firstIndex, vec3 center, float radius, vec3 color, float shininess) {
@@ -1405,7 +1406,7 @@ Mesh createSphereMesh(GLuint firstIndex, vec3 center, float radius, vec3 color, 
         }
     }
 
-    return Mesh(vertices, colors, shininesses, indices, normals);
+    return Mesh(firstIndex, vertices, colors, shininesses, indices, normals);
 }
 
 Mesh createCylinderMesh(GLuint firstIndex, vec3 center, float radius, float height, vec3 color, float shininess) {
@@ -1462,7 +1463,7 @@ Mesh createCylinderMesh(GLuint firstIndex, vec3 center, float radius, float heig
         }
     };
 
-    return Mesh(vertices, colors, shininesses, indices, normals);
+    return Mesh(firstIndex, vertices, colors, shininesses, indices, normals);
 }
 
 Mesh createTreeMesh(GLuint firstIndex, vec3 position) {
@@ -1481,7 +1482,7 @@ Mesh createTreeMesh(GLuint firstIndex, vec3 position) {
 
     const vec3 treeTrunkCenter(position.x, position.y + TREE_TRUNK_HEIGHT / 2.0f, position.z);
     const auto treeTrunkMesh = createCylinderMesh(
-            firstIndex + treeLeavesMesh.vertices.size(),
+            treeLeavesMesh.firstIndex + treeLeavesMesh.vertices.size(),
             treeTrunkCenter, TREE_TRUNK_RADIUS, TREE_TRUNK_HEIGHT,
             Constants::COLOR_TREE_TRUNK, TREE_TRUNK_SHININESS);
 
@@ -1495,13 +1496,18 @@ Mesh createTreeMesh(GLuint firstIndex, vec3 position) {
 
 void initializeScene() {
     const auto platformAndHouseMesh = createPlatformAndHouseMesh();
-    const auto treeMesh = createTreeMesh(
-            platformAndHouseMesh.vertices.size(),
+    const auto frontTreeMesh = createTreeMesh(
+            platformAndHouseMesh.firstIndex + platformAndHouseMesh.vertices.size(),
             vec3(-450.0f, 0.0f, -600.0f)
+    );
+    const auto backTreeMesh = createTreeMesh(
+            frontTreeMesh.firstIndex + frontTreeMesh.vertices.size(),
+            vec3(-750.0f, 0.0f, 500.0f)
     );
     vector<Mesh> meshes = {
             platformAndHouseMesh,
-            treeMesh
+            frontTreeMesh,
+            backTreeMesh
     };
 
     const auto worldMesh = combineMeshes(meshes);
@@ -1565,7 +1571,7 @@ void render() {
     glUniform3f(skyColorLocation, Constants::COLOR_SKY.r, Constants::COLOR_SKY.g, Constants::COLOR_SKY.b);
 
     glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, 5000, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 6000, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
