@@ -6,6 +6,7 @@ in vec3 ex_Normal;
 in vec3 ex_LightPosition;
 in vec3 ex_ViewPosition;
 in float ex_Shininess;
+in float ex_Visibility;
 
 uniform vec3 lightColor;
 uniform vec3 skyColor;
@@ -36,4 +37,6 @@ void main() {
     // Final color
     vec3 result = (ambientTerm + diffuseTerm + specularTerm) * objectColor;
     out_Color = vec4(result, 1.0f);
+
+    out_Color = mix(vec4(skyColor, 1.0f), out_Color, ex_Visibility);
 }

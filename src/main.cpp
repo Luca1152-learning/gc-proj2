@@ -37,7 +37,7 @@ GLuint viewPositionLocation, lightPositionLocation, lightColorLocation, skyColor
 // Camera
 const float CAMERA_FOV = 75.0f;
 const float CAMERA_NEAR_PLANE = 0.1f;
-const float CAMERA_FAR_PLANE = 3500.0f;
+const float CAMERA_FAR_PLANE = 5500.0f;
 glm::vec3 cameraPos = glm::vec3(100.0f, 300.0f, -1500.0f);
 glm::vec3 cameraDirection = glm::vec3(0.0f, 0.0f, 1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);

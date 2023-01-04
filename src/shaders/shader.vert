@@ -16,10 +16,15 @@ out vec3 ex_Normal;
 out vec3 ex_LightPosition;
 out vec3 ex_ViewPosition;
 out float ex_Shininess;
+out float ex_Visibility;
+
+const float density = 0.002f;
+const float gradient = 5.0f;
 
 void main() {
     mat4 camera = projectionShader * viewShader;
-    gl_Position = camera * vec4(in_Position, 1.0);
+    vec4 position = camera * vec4(in_Position, 1.0);
+    gl_Position = position;
 
     ex_Color = vec4(in_Color, 1.0f);
     ex_FragPos = vec3(gl_Position);
@@ -27,4 +32,9 @@ void main() {
     ex_LightPosition = vec3(camera * vec4(lightPosition, 1.0f));
     ex_ViewPosition = vec3(camera * vec4(viewPosition, 1.0f));
     ex_Shininess = in_Shininess;
+
+    vec3 positionRelativeToCamera = ex_ViewPosition * position.xyz;
+    float distance = length(positionRelativeToCamera);
+    ex_Visibility = exp(-pow((distance * density), gradient));
+    ex_Visibility = clamp(ex_Visibility, 0.0f, 1.0f);
 }
