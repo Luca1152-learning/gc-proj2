@@ -60,7 +60,7 @@ const glm::vec3 LIGHT_COLOR = glm::vec3(0.6f, 0.6f, 0.6f);
 glm::vec3 lightPosition = glm::vec3(500.f, 1000.f, -1000.f);
 
 void processInput(GLFWwindow *window) {
-    float cameraSpeed = static_cast<float>(MOVEMENT_SPEED * deltaTime);
+    float cameraSpeed = (float)(MOVEMENT_SPEED * deltaTime);
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         cameraPos += cameraSpeed * cameraDirection;
@@ -83,8 +83,8 @@ void processInput(GLFWwindow *window) {
 }
 
 void mouseCallback(GLFWwindow *_, double dMouseX, double dMouseY) {
-    float mouseX = static_cast<float>(dMouseX);
-    float mouseY = static_cast<float>(dMouseY);
+    float mouseX = (float)(dMouseX);
+    float mouseY = (float)(dMouseY);
 
     float offsetX = 0.0f, offsetY = 0.0f;
     if (isFirstMouseCallback) {
@@ -1595,7 +1595,7 @@ int main() {
         processInput(window);
 
         // Timing
-        float currentFrame = static_cast<float>(glfwGetTime());
+        float currentFrame = (float)(glfwGetTime());
         deltaTime = currentFrame - lastFrameTimestamp;
         lastFrameTimestamp = currentFrame;
 
