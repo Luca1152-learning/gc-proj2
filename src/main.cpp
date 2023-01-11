@@ -38,9 +38,9 @@ GLuint viewPositionLocation, lightPositionLocation, lightColorLocation, skyColor
 const float CAMERA_FOV = 75.0f;
 const float CAMERA_NEAR_PLANE = 0.1f;
 const float CAMERA_FAR_PLANE = 5500.0f;
-glm::vec3 cameraPos = glm::vec3(100.0f, 300.0f, -1500.0f);
-glm::vec3 cameraDirection = glm::vec3(0.0f, 0.0f, 1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+const vec3 CAMERA_UP = vec3(0.0f, 1.0f, 0.0f);
+vec3 cameraPos = vec3(100.0f, 300.0f, -1500.0f);
+vec3 cameraDirection = vec3(0.0f, 0.0f, 1.0f);
 float cameraYaw = 90.0f;
 float cameraPitch = 0.0f;
 
@@ -69,10 +69,10 @@ void processInput(GLFWwindow *window) {
         cameraPos -= cameraSpeed * cameraDirection;
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        cameraPos += glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
+        cameraPos += glm::normalize(glm::cross(cameraDirection, CAMERA_UP)) * cameraSpeed;
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        cameraPos -= glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
+        cameraPos -= glm::normalize(glm::cross(cameraDirection, CAMERA_UP)) * cameraSpeed;
     }
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
         cameraPos.y += cameraSpeed;
@@ -1561,7 +1561,7 @@ void render() {
     glUniformMatrix4fv(projLocation, 1, GL_FALSE, &projection[0][0]);
 
     // View
-    glm::mat4 view = glm::lookAtLH(cameraPos, cameraPos + cameraDirection, cameraUp);
+    glm::mat4 view = glm::lookAtLH(cameraPos, cameraPos + cameraDirection, CAMERA_UP);
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
     // Lighting
